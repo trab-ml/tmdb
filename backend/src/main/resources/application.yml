@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: movie-app
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+
+  config:
+    import:
+      - classpath:database.yml
+      - optional:classpath:actuator.yml

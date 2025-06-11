@@ -1,0 +1,17 @@
+services:
+  db:
+    image: 'postgres:17-alpine'
+    container_name: movie-app-bdd
+    ports:
+      - '${DB_LOCAL_PORT}:${DB_DOCKER_PORT}'
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data:/app
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

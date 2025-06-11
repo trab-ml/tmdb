@@ -1,0 +1,45 @@
+services:
+  db:
+    image: 'postgres:17-alpine'
+    container_name: movie-app-bdd
+    ports:
+      - '${DB_LOCAL_PORT}:${DB_DOCKER_PORT}'
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data:/app
+    networks:
+      - backend
+
+  spring-service:
+    container_name: movie-app-back
+    build: ~/IdeaProjects/movie-app/backend
+    depends_on:
+      - db
+    environment:
+      - DRIVER_CLASS_NAME=${DRIVER_CLASS_NAME}
+      - FRONT_URL=${FRONT_URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - '${BACKEND_LOCAL_PORT}:${BACKEND_DOCKER_PORT}'
+    networks:
+      - backend
+
+  vue-service:
+    build: ~/IdeaProjects/movie-app/frontend
+    container_name: movie-app-front
+    depends_on:
+      - spring-service
+    ports:
+      - '${FRONTEND_LOCAL_PORT}:${FRONTEND_DOCKER_PORT}'
+    networks:
+      - frontend
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge

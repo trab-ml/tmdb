@@ -1,54 +1,64 @@
 package fr.movieapp.external;
 
 import fr.movieapp.external.dto.MovieApiResponseDto;
-import fr.movieapp.external.dto.MovieDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import fr.movieapp.mappers.ToResponseMapper;
+import fr.movieapp.models.Movie;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 @Service
 public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiMoviesWebClientServiceImpl.class);
+    private final RestTemplate REST_TEMPLATE;
+    private final String TMBD_API_KEY;
+    private final String TMBD_API_BASE_URL;
+    private final String TMBD_MOST_RATED_MOVIES_API_PATH;
+    private final String LANGUAGE;
+    private final String SORT_BY;
 
-    private final WebClient webClient;
-    private static String TMDB_API_KEY = "";
-    private static String TMDB_API_BASE_URL = "";
-    private static String TMDB_MOST_RATED_MOVIES_API_PATH = "";
-
-    public ApiMoviesWebClientServiceImpl(@Value("${TMDB_API_BASE_URL}") String apiBaseUrl,
-                                         @Value("${TMDB_MOST_RATED_MOVIES_API_URL}") String mostRatedMoviesPath,
-                                         @Value("${TMDB_API_KEY}") String apiKey) {
-        TMDB_API_BASE_URL = apiBaseUrl;
-        TMDB_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
-        TMDB_API_KEY = apiKey;
-        this.webClient = WebClient.builder().baseUrl(TMDB_API_BASE_URL).build();
+    public ApiMoviesWebClientServiceImpl(@Value("${TMDB_API_BASE_URL}") String baseUrl,
+                                         @Value("${TMDB_MOST_RATED_MOVIES_API_PATH}") String mostRatedMoviesPath,
+                                         @Value("${TMDB_API_KEY}") String apiKey,
+                                         @Value("${LANGUAGE}") String language,
+                                         @Value("${SORT_BY}") String sortBy) {
+        this.TMBD_API_BASE_URL = baseUrl;
+        this.TMBD_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
+        this.TMBD_API_KEY = apiKey;
+        this.LANGUAGE = language;
+        this.SORT_BY = sortBy;
+        this.REST_TEMPLATE = new RestTemplate();
     }
 
-//    Movie
-    public List<MovieDto> getTopRatedMovies() {
-        Mono<MovieApiResponseDto> responseAsMono = webClient.get()
-                .uri(uriBuilder ->
-                        uriBuilder.path(TMDB_MOST_RATED_MOVIES_API_PATH)
-                                .queryParam("language", "fr-FR")
-                                .queryParam("sort_by", "created_at.desc")
-                                .build()
-                )
-                .retrieve()
-                .bodyToMono(MovieApiResponseDto.class);
-
+    @Override
+    public List<Movie> getTopRatedMovies() {
         try {
-            // mapping: ToResponseMapper.
-        } catch (HttpClientErrorException except) {
-            LOGGER.error("Error encountered during API call", except);
-            throw except;
-        }
+            String url = buildUrl();
+            MovieApiResponseDto response = REST_TEMPLATE.getForObject(url, MovieApiResponseDto.class);
 
-        return List.of();
+            if (response == null) {
+                log.warn("api response is null");
+                return new ArrayList<>();
+            }
+            return ToResponseMapper.toMovies(response);
+        } catch (RestClientException ex) {
+            throw new RuntimeException("error while fetching movies", ex);
+        } catch (Exception ex) {
+            log.error("Unexpected error: {}", ex.getMessage(), ex);
+            throw new RuntimeException("Unexpected error", ex);
+        }
+    }
+
+    private String buildUrl() {
+        return TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
+                "?api_key=" + TMBD_API_KEY +
+                "&language=" + LANGUAGE +
+                "&sort_by=" + SORT_BY;
     }
 }

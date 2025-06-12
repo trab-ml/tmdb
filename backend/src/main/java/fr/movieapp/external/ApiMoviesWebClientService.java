@@ -1,9 +1,9 @@
 package fr.movieapp.external;
 
-import fr.movieapp.external.dto.MovieDto;
+import fr.movieapp.models.Movie;
 
 import java.util.List;
 
 public interface ApiMoviesWebClientService {
-    List<MovieDto> getTopRatedMovies();
+    List<Movie> getTopRatedMovies();
 }

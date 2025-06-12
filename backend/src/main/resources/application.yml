@@ -4,6 +4,8 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: false
+#    serialization:
+#      fail-on-empty-beans: false
 
   config:
     import:

@@ -6,7 +6,7 @@ import java.util.List;
 
 public record MovieDto(
         int id,
-        @JsonProperty("adult") boolean isForAdult,
+        boolean adult,
         @JsonProperty("genre_ids") List<Integer> genreIds,
         @JsonProperty("original_language") String originalLanguage,
         @JsonProperty("original_title") String originalTitle,

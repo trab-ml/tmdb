@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import router from "./router.ts";
+import { i18n } from "./utils/translate/translate.ts"
 
 // Vuetify
 import { createVuetify } from 'vuetify'
@@ -16,4 +18,8 @@ const vuetify = createVuetify({
     directives,
 })
 
-createApp(App).use(vuetify).mount('#app')
+const app = createApp(App);
+
+app.use(router);
+app.use(i18n);
+app.use(vuetify).mount('#app');

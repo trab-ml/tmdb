@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ApiMoviesWebClientService {
     List<Movie> getTopRatedMovies();
+    List<Movie> getPopularMovies();
 }

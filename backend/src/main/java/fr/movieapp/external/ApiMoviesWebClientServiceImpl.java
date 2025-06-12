@@ -20,16 +20,19 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
     private final String TMBD_API_KEY;
     private final String TMBD_API_BASE_URL;
     private final String TMBD_MOST_RATED_MOVIES_API_PATH;
+    private final String TMDB_POPULAR_MOVIES_API_PATH;
     private final String LANGUAGE;
     private final String SORT_BY;
 
     public ApiMoviesWebClientServiceImpl(@Value("${TMDB_API_BASE_URL}") String baseUrl,
                                          @Value("${TMDB_MOST_RATED_MOVIES_API_PATH}") String mostRatedMoviesPath,
+                                         @Value("${TMDB_POPULAR_MOVIES_API_PATH}") String popularMoviesPath,
                                          @Value("${TMDB_API_KEY}") String apiKey,
                                          @Value("${LANGUAGE}") String language,
                                          @Value("${SORT_BY}") String sortBy) {
         this.TMBD_API_BASE_URL = baseUrl;
         this.TMBD_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
+        this.TMDB_POPULAR_MOVIES_API_PATH = popularMoviesPath;
         this.TMBD_API_KEY = apiKey;
         this.LANGUAGE = language;
         this.SORT_BY = sortBy;
@@ -38,8 +41,23 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
 
     @Override
     public List<Movie> getTopRatedMovies() {
+        return fetchMovies(TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
+                "?api_key=" + TMBD_API_KEY +
+                "&language=" + LANGUAGE +
+                "&sort_by=" + SORT_BY
+        );
+    }
+
+    @Override
+    public List<Movie> getPopularMovies() {
+        return fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
+                "?api_key=" + TMBD_API_KEY +
+                "&language=" + LANGUAGE
+        );
+    }
+
+    public List<Movie> fetchMovies(String url) {
         try {
-            String url = buildUrl();
             MovieApiResponseDto response = REST_TEMPLATE.getForObject(url, MovieApiResponseDto.class);
 
             if (response == null) {
@@ -53,12 +71,5 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
             log.error("Unexpected error: {}", ex.getMessage(), ex);
             throw new RuntimeException("Unexpected error", ex);
         }
-    }
-
-    private String buildUrl() {
-        return TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
-                "?api_key=" + TMBD_API_KEY +
-                "&language=" + LANGUAGE +
-                "&sort_by=" + SORT_BY;
     }
 }

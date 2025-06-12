@@ -1,3 +1,51 @@
 <template>
-  <header>header</header>
+  <v-container class="mx-3">
+    <v-app-bar :elevation="2" rounded>
+      <v-app-bar-title>
+        <RouterLink to="/">
+          <div class="tooltip">
+            {{$t('header.logoText')}} <span class="tooltiptext"> {{$t('header.logoTooltipText')}} </span>
+          </div>
+        </RouterLink>
+      </v-app-bar-title>
+
+      <template v-slot:append>
+          <RouterLink to="/" >{{$t('header.navbar.popularMovies')}}</RouterLink>
+          <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem" class="text-decoration-none">{{$t('header.profile')}}</RouterLink>
+      </template>
+    </v-app-bar>
+  </v-container>
 </template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 14rem;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 1rem;
+  margin: 0 0.5rem;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+</style>

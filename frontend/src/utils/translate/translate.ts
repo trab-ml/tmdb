@@ -3,8 +3,8 @@ import {fr} from "./fr.ts";
 import {en} from "./en.ts";
 
 export const i18n = createI18n({
-    locale: 'en',
-    fallbackLocale: 'fr',
+    locale: 'fr',
+    fallbackLocale: 'en',
     messages: {
         fr: fr,
         en: en,

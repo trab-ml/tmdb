@@ -1,6 +1,8 @@
 <template>
   <Header />
-  <main>Here are popular movies</main>
+  <main>
+    <h1>Profile</h1>
+  </main>
 </template>
 
 <script setup lang="ts">

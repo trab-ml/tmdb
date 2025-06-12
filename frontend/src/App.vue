@@ -1,7 +1,12 @@
 <template>
-  <div class="container">
+  <v-app>
     <RouterView />
-  </div>
+  </v-app>
 </template>
-<script setup lang="ts">
-</script>
+
+<style>
+main {
+  position: absolute !important;
+  top: 5rem;
+}
+</style>

@@ -1,7 +1,7 @@
 package fr.movieapp.external;
 
 import fr.movieapp.external.dto.MovieApiResponseDto;
-import fr.movieapp.mappers.ToResponseMapper;
+import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Movie;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,7 +64,7 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
                 log.warn("api response is null");
                 return new ArrayList<>();
             }
-            return ToResponseMapper.toMovies(response);
+            return ToModelMapper.toMovies(response);
         } catch (RestClientException ex) {
             throw new RuntimeException("error while fetching movies", ex);
         } catch (Exception ex) {

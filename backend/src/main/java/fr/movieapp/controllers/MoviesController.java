@@ -1,7 +1,8 @@
 package fr.movieapp.controllers;
 
+import fr.movieapp.controllers.responses.MovieResponse;
 import fr.movieapp.external.ApiMoviesWebClientService;
-import fr.movieapp.models.Movie;
+import fr.movieapp.mappers.ToResponseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,12 +24,16 @@ public class MoviesController {
     }
 
     @GetMapping("/top-rated")
-    public ResponseEntity<List<Movie>> getMovies() {
-        return ResponseEntity.ok().body(apiMoviesWebClientService.getTopRatedMovies());
+    public ResponseEntity<List<MovieResponse>> getMovies() {
+        return ResponseEntity.ok().body(
+                ToResponseMapper.toResponse(apiMoviesWebClientService.getTopRatedMovies())
+        );
     }
 
-    @GetMapping("/popular")
-    public ResponseEntity<List<Movie>> getPopularMovies() {
-        return ResponseEntity.ok().body(apiMoviesWebClientService.getPopularMovies());
+    @GetMapping("/best-movies")
+    public ResponseEntity<List<MovieResponse>> getPopularMovies() {
+        return ResponseEntity.ok().body(
+                ToResponseMapper.toResponse(apiMoviesWebClientService.getPopularMovies())
+        );
     }
 }

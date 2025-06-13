@@ -64,7 +64,7 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
                 log.warn("api response is null");
                 return new ArrayList<>();
             }
-            return ToModelMapper.toMovies(response);
+            return ToModelMapper.toModel(response);
         } catch (RestClientException ex) {
             throw new RuntimeException("error while fetching movies", ex);
         } catch (Exception ex) {

@@ -2,10 +2,10 @@ package fr.movieapp.mappers;
 
 import fr.movieapp.controllers.responses.GenreResponse;
 import fr.movieapp.controllers.responses.MovieResponse;
-import fr.movieapp.models.Genre;
+import fr.movieapp.controllers.responses.ProfileResponse;
 import fr.movieapp.models.Movie;
+import fr.movieapp.models.Profile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ToResponseMapper {
@@ -27,6 +27,16 @@ public class ToResponseMapper {
 
     public static List<MovieResponse> toResponse(List<Movie> movieList) {
         return movieList.stream()
+                .map(ToResponseMapper::toResponse)
+                .toList();
+    }
+
+    public static ProfileResponse toResponse(Profile p) {
+        return new ProfileResponse(p.getId(), p.getAdult(), p.getGenreList());
+    }
+
+    public static List<ProfileResponse> profilesToResponse(List<Profile> profiles) {
+        return profiles.stream()
                 .map(ToResponseMapper::toResponse)
                 .toList();
     }

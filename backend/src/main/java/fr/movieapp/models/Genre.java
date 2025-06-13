@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 @Slf4j
 @Getter
@@ -22,27 +21,17 @@ public enum Genre {
         this.value = val;
     }
 
-    public static Optional<Genre> getGenre(String val) {
-        Optional<Genre> genre = Arrays.stream(Genre.values())
+    public static Genre getGenre(String val) {
+        return Arrays.stream(Genre.values())
                 .filter(g -> g.getValue().equals(val))
-                .findFirst();
-
-        if (genre.isEmpty()) {
-            log.info("Genre {} not found", val);
-        }
-
-        return genre;
+                .findFirst()
+                .orElse(Genre.DEFAULT);
     }
 
-    public static Optional<Genre> getGenre(int id) {
-        Optional<Genre> genre = Arrays.stream(Genre.values())
+    public static Genre getGenre(int id) {
+        return Arrays.stream(Genre.values())
                 .filter(g -> g.getId() == id)
-                .findFirst();
-
-        if (genre.isEmpty()) {
-            log.info("Genre {} not found", id);
-        }
-
-        return genre;
+                .findFirst()
+                .orElse(Genre.DEFAULT);
     }
 }

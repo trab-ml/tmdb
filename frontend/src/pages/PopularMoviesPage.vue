@@ -71,7 +71,7 @@ onMounted(async () => {
 <style scoped>
 .movies-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 18rem 18rem 18rem 18rem;
   background-color: #f2f2f2;
   gap: 1rem;
   padding: 1rem;

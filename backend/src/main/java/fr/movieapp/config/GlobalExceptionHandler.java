@@ -1,5 +1,6 @@
 package fr.movieapp.config;
 
+import fr.movieapp.exceptions.AlreadyExistsException;
 import fr.movieapp.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({NotFoundException.class})
     public ProblemDetail handleException(final NotFoundException ex) {
+        return getProblemDetail(ex.getStatus(), ex.getMessage(), ex, new HashMap<>());
+    }
+
+    @ExceptionHandler({AlreadyExistsException.class})
+    public ProblemDetail handleException(final AlreadyExistsException ex) {
         return getProblemDetail(ex.getStatus(), ex.getMessage(), ex, new HashMap<>());
     }
 

@@ -16,6 +16,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/profiles")
+@CrossOrigin("http://localhost:5173")
 public class ProfileController {
     private final ProfileService profileService;
 

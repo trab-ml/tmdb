@@ -1,8 +1,8 @@
 <template>
   <div class="error-container">
     <h1> 404 </h1>
-    <p>Oups! page non trouvée!</p>
-    <RouterLink to="/">Retourner à l'accueil</RouterLink>
+    <p>{{$t('notFoundPage.info')}}</p>
+    <RouterLink to="/">{{$t('notFoundPage.callToAction')}}</RouterLink>
   </div>
 </template>
 

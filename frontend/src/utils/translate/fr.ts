@@ -3,9 +3,18 @@ export const fr = {
         logoText: 'NMDB',
         logoTooltipText: 'Nextoo Movie DataBase',
         navbar: {
-            popularMovies: 'Popular Movies',
-            profile: 'Profile'
-        }
+            popularMovies: 'Meilleurs films',
+            profile: 'Profil'
+        },
     },
-    profile: {}
+    popularMoviesPage: {
+        title: 'Meilleurs Films'
+    },
+    profilePage: {
+        title: 'Profil'
+    },
+    notFoundPage: {
+        info: 'Oups! page non trouvée!',
+        callToAction: 'Retourner à l\'accueil'
+    }
 }

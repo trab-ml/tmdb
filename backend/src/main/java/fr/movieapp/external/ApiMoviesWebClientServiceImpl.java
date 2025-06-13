@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Slf4j
 @Service
 public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService {
@@ -53,7 +52,7 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
         return fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
                 "?api_key=" + TMBD_API_KEY +
                 "&language=" + LANGUAGE
-        );
+        ).subList(0, 10);
     }
 
     public List<Movie> fetchMovies(String url) {

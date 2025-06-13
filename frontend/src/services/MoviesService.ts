@@ -1,12 +1,6 @@
 import axios from "axios";
 
 export default class MoviesService {
-    // readonly contentType: {"Content-Type": string}
-    //
-    // MoviesService() {
-    //     this.contentType = { "Content-Type": "application/json" }
-    // }
-
     public async getPopularMovies() {
         let movies
 

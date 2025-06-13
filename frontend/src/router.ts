@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import PopularMoviesPage from "./pages/PopularMoviesPage.vue";
 import NotFound from "./molecules/NotFound.vue";
-import Profile from "./pages/Profile.vue";
+import ProfilePage from "./pages/ProfilePage.vue";
 
 const routes = [
     {
@@ -13,7 +13,7 @@ const routes = [
     {
         path: '/profile',
         name: 'profilePage',
-        component: Profile
+        component: ProfilePage
     },
     {
         path: '/:pathMatch(.*)*',

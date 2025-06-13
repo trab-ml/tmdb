@@ -8,6 +8,6 @@
 main {
   position: absolute !important;
   top: 5rem;
-  margin: 0 1rem;
+  margin: 0 .5rem;
 }
 </style>

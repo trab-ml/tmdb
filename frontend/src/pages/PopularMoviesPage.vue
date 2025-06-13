@@ -1,7 +1,7 @@
 <template>
   <Header />
   <main>
-    <h1>Best Movies</h1>
+    <h1>{{$t('popularMoviesPage.title')}}</h1>
 
     <div class="movies-container">
       <v-card

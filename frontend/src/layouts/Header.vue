@@ -11,7 +11,7 @@
 
       <template v-slot:append>
           <RouterLink to="/" >{{$t('header.navbar.popularMovies')}}</RouterLink>
-          <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem" class="text-decoration-none">{{$t('header.profile')}}</RouterLink>
+          <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem" class="text-decoration-none">{{$t('header.navbar.profile')}}</RouterLink>
       </template>
     </v-app-bar>
   </v-container>

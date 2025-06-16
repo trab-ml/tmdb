@@ -1,12 +1,12 @@
 <template>
   <Header />
-  <main>
+  <main style="width: 100%; position: relative; display: flex; flex-direction: column; justify-items: center; align-items: center">
     <h1>{{$t('profilePage.title')}}</h1>
 
     <h2>{{$t('profilePage.formTitle')}}</h2>
     <form
         action=""
-        @submit.prevent="handleSubmit"
+        @submit="handleSubmit"
         style="border: 1px solid; border-radius: 1rem; padding: 1rem 0.5rem">
       <CheckboxField :label="$t('profilePage.adultCheckboxLabel')" @getInputValue="(v: boolean) => toSubmit.isAdult = v"/>
 
@@ -30,7 +30,7 @@
     </form>
 
     <TableOfProfiles v-if="profiles.length > 0" :items="profiles" />
-    <p v-else>{{$t('profilePage.noSelectedGenre')}}</p>
+    <p v-else>{{$t('profilePage.noSavedGenre')}}</p>
   </main>
 </template>
 
@@ -57,12 +57,10 @@ const handleSubmit = () => {
   console.log(toSubmit)
 
   profilesService.addProfile(toSubmit);
-
-  // window.location.href = "http://localhost:5173/"
-};
+}
 
 onMounted(async () => {
-  profiles.value = await  profilesService.getProfiles()
+  profiles.value = await profilesService.getProfiles()
 })
 </script>
 

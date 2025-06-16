@@ -8,19 +8,26 @@ export const fr = {
         },
     },
     popularMoviesPage: {
-        title: 'Meilleurs Films'
+        title: 'Meilleurs Films',
+        submitButtonText: 'Rechercher',
+        emptyProfileList: {
+            preLink: 'Liste de profil vide! Veuillez',
+            link: 'créer',
+            postLink: 'des profils avant.',
+        }
     },
     profilePage: {
         title: 'Profil',
         formTitle: 'Créer un profil',
         adultCheckboxLabel: 'Adulte (- 18 ans?)',
         genreSelectFieldTitled: 'Genre',
-        submitButtonText: 'Envoyer'
+        submitButtonText: 'Envoyer',
+        noSavedGenre: 'Aucun profil sauvegardé',
     },
     tableOfProfiles: {
         title: 'Profils Sauvegardés',
         header: {
-            th1: 'Profil n °',
+            th1: 'Profil',
             th2: 'Moins de 18 ans ?',
             th3: 'Genres',
         },
@@ -29,7 +36,6 @@ export const fr = {
             minor: 'Pas de restriction d\'âge',
             takeALook: 'Voir',
             noAssociatedGenre: 'Aucun genre associé', // TOUT
-            noSelectedGenre: 'Aucun profil sauvegardé'
         }
     },
     notFoundPage: {

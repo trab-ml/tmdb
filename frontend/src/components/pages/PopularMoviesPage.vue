@@ -1,7 +1,21 @@
 <template>
   <Header />
   <main>
-    <h1>{{$t('popularMoviesPage.title')}}</h1>
+    <h1>{{ $t('popularMoviesPage.title') }}</h1>
+
+    <form action="" @submit.prevent="handleSubmit">
+      <TableOfProfiles v-if="profiles.length > 0" :items="profiles" :formMode="true"
+                       @getInputValue="v => selectedProfile = v"/>
+
+      <SubmitButton v-if="profiles.length > 0" :value="$t('popularMoviesPage.submitButtonText')"
+                    class="cursor-pointer"
+                    style="display: flex; justify-self: center !important; margin: 2rem 0"/>
+      <p v-else>
+        {{ $t('popularMoviesPage.emptyProfileList.preLink') }}
+        <RouterLink to="/profile">{{ $t('popularMoviesPage.emptyProfileList.link') }}</RouterLink>
+        {{ $t('popularMoviesPage.emptyProfileList.postLink') }}
+      </p>
+    </form>
 
     <div class="movies-container">
       <v-card
@@ -57,15 +71,27 @@
 import Header from "../layouts/Header.vue"
 import MoviesService from "../../services/MoviesService.ts"
 import {onMounted, ref} from "vue"
+import TableOfProfiles from "../organisms/TableOfProfiles.vue";
+import ProfilesService from "../../services/ProfilesService.ts";
+import SubmitButton from "../atoms/SubmitButton.vue";
 
 let show = ref(false)
 let movieList = ref()
 const moviesService = new MoviesService()
+const profilesService = new ProfilesService()
+const profiles = ref([])
+let selectedProfile = ''
 
 onMounted(async () => {
   movieList.value = await moviesService.getPopularMovies()
+  profiles.value = await profilesService.getProfiles()
 })
 
+const handleSubmit = () => {
+  console.log(selectedProfile)
+  // post
+  // update de la page
+}
 </script>
 
 <style scoped>

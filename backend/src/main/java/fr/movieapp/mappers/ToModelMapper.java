@@ -74,16 +74,20 @@ public class ToModelMapper {
         log.info(stringValuesOfWeatherTypes.toString());
 
         return stringValuesOfWeatherTypes.stream()
-                .map(s -> Genre.getGenre(Integer.parseInt(s.trim())))
+                .map(s -> Genre.getGenre(s.trim()))
                 .distinct()
                 .toList();
+//        log.info("selectedGenres (extractGenres):");
+//        selectedGenres.forEach(g -> log.info("--> {}", g));
+//        return selectedGenres;
     }
 
     public static Profile toModel(ProfileRequest req) {
+//        log.info("ProfileRequest: ", req.toString());
         return new Profile(
                 req.id(),
                 req.adult(),
-                req.genreList().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.genreList().get())
+                req.genreIdsList().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.genreIdsList().get())
         );
     }
 

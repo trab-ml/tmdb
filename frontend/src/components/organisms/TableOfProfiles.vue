@@ -1,5 +1,5 @@
 <template>
-  <h2>{{$t('tableOfProfiles.title')}}</h2>
+  <h2>{{ $t('tableOfProfiles.title') }}</h2>
   <v-table class="result-table rounded-lg border-solid" height="300px">
     <thead>
     <tr>
@@ -14,7 +14,14 @@
         v-for="(item, index) in props.items"
         :key="item.name"
     >
-      <td>{{ index }}</td>
+      <td v-if="props.formMode === true">
+        <label>
+          <input type="radio" :id="`profile-${index}`" :value="item.id" v-model="selectedProfile" @change="onChange"/>
+          n° {{ index + 1 }}
+        </label>
+      </td>
+      <td v-else>n° {{ index + 1 }}</td>
+
       <td>
         <img
             v-if="item.adult === true"
@@ -61,22 +68,25 @@
 import okIcon from "/src/assets/ok-32px.png"
 import koIcon from "/src/assets/not-ok-32px.png"
 import takeALookIcon from "/src/assets/take-look-32px.png"
+import {ref} from 'vue'
 
 const props = defineProps({
   items: Array,
   formMode: Boolean
 });
+
+const selectedProfile = ref('')
+
+const emits = defineEmits(['getInputValue']);
+const onChange = () => {
+  emits('getInputValue', selectedProfile.value);
+}
 </script>
 
 <style scoped>
 @media screen and (min-width: 600px) {
   .result-table {
     width: 100%;
-  }
-}
-@media screen and (min-width: 960px) {
-  .result-table {
-    height: 600px !important;
   }
 }
 </style>

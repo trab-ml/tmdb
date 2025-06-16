@@ -1,5 +1,5 @@
 <template>
-  <h2>Profils Sauvegardés</h2>
+  <h2>{{$t('tableOfProfiles.title')}}</h2>
   <v-table class="result-table rounded-lg border-solid" height="300px">
     <thead>
     <tr>
@@ -27,22 +27,26 @@
       </td>
       <td>
         <div class="text-center">
-          <v-menu
-              open-on-hover
-          >
+          <v-menu open-on-hover>
             <template v-slot:activator="{ props }">
               <p v-bind="props">
-                <img :src="takeALookIcon" alt="">
+                <img :src="takeALookIcon" :alt="$t('tableOfProfiles.body.takeALook')">
               </p>
             </template>
 
             <v-list>
               <v-list-item
+                  v-if="item.genreList.length > 0"
                   v-for="(genre, index) in item.genreList"
                   :key="index"
-                  :value="genre"
               >
                 <v-list-item-title>{{ genre }}</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item
+                  v-else
+              >
+                <v-list-item-title>{{ $t('tableOfProfiles.body.noAssociatedGenre') }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>

@@ -12,10 +12,13 @@ export const fr = {
     },
     profilePage: {
         title: 'Profil',
-        formTitle: 'Créer un profil'
+        formTitle: 'Créer un profil',
+        adultCheckboxLabel: 'Adulte (- 18 ans?)',
+        genreSelectFieldTitled: 'Genre',
+        submitButtonText: 'Envoyer'
     },
     tableOfProfiles: {
-        tile: 'Profils Sauvegardés',
+        title: 'Profils Sauvegardés',
         header: {
             th1: 'Profil n °',
             th2: 'Moins de 18 ans ?',
@@ -24,6 +27,9 @@ export const fr = {
         body: {
             major: 'Moins de 18 ans',
             minor: 'Pas de restriction d\'âge',
+            takeALook: 'Voir',
+            noAssociatedGenre: 'Aucun genre associé', // TOUT
+            noSelectedGenre: 'Aucun profil sauvegardé'
         }
     },
     notFoundPage: {

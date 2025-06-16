@@ -5,12 +5,12 @@
   </label>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {ref} from "vue";
 
-const props = defineProps({
-  'label': String
-});
+const props = defineProps<{
+  'label': string
+}>();
 const value = ref(false);
 const emits = defineEmits(['getInputValue']);
 const onChange = (event) => {

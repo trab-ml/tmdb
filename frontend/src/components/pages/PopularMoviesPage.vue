@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import Header from "../layouts/Header.vue"
-import MoviesService from "../services/MoviesService.ts"
+import MoviesService from "../../services/MoviesService.ts"
 import {onMounted, ref} from "vue"
 
 let show = ref(false)

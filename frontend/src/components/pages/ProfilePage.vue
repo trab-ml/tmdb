@@ -15,6 +15,8 @@
       </div>
       <SubmitButton class="mt-3" value="Envoyer"/>
     </form>
+
+<!--Textual cards to list saved profiles-->
   </main>
 </template>
 
@@ -22,9 +24,9 @@
 import Header from "../layouts/Header.vue"
 import CheckboxField from "../atoms/CheckboxField.vue"
 import SelectField from "../atoms/SelectField.vue"
-import {getMovieGenres} from "../types/global.ts"
+import {getMovieGenres} from "../../types/global.ts"
 import SubmitButton from "../atoms/SubmitButton.vue";
-import ProfilesService from "../services/ProfilesService.ts";
+import ProfilesService from "../../services/ProfilesService.ts";
 
 const toSubmit = {
   isAdult: false,

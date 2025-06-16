@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import PopularMoviesPage from "./pages/PopularMoviesPage.vue";
-import NotFound from "./molecules/NotFound.vue";
-import ProfilePage from "./pages/ProfilePage.vue";
+import PopularMoviesPage from "./components/pages/PopularMoviesPage.vue";
+import NotFound from "./components/molecules/NotFound.vue";
+import ProfilePage from "./components/pages/ProfilePage.vue";
 
 const routes = [
     {

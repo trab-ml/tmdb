@@ -23,6 +23,7 @@ public class ProfileController {
     public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
     }
+
     @GetMapping
     public ResponseEntity<List<ProfileResponse>> getProfiles() {
         return ResponseEntity.ok()

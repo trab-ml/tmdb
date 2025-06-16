@@ -77,13 +77,9 @@ public class ToModelMapper {
                 .map(s -> Genre.getGenre(s.trim()))
                 .distinct()
                 .toList();
-//        log.info("selectedGenres (extractGenres):");
-//        selectedGenres.forEach(g -> log.info("--> {}", g));
-//        return selectedGenres;
     }
 
     public static Profile toModel(ProfileRequest req) {
-//        log.info("ProfileRequest: ", req.toString());
         return new Profile(
                 req.id(),
                 req.adult(),

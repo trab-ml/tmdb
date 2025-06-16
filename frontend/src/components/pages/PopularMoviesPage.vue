@@ -9,6 +9,7 @@
 
       <SubmitButton v-if="profiles.length > 0" :value="$t('popularMoviesPage.submitButtonText')"
                     class="cursor-pointer"
+                    :disabled="selectedProfile === ''"
                     style="display: flex; justify-self: center !important; margin: 2rem 0"/>
       <p v-else>
         {{ $t('popularMoviesPage.emptyProfileList.preLink') }}
@@ -80,17 +81,15 @@ let movieList = ref()
 const moviesService = new MoviesService()
 const profilesService = new ProfilesService()
 const profiles = ref([])
-let selectedProfile = ''
+let selectedProfile = ref('')
 
 onMounted(async () => {
   movieList.value = await moviesService.getPopularMovies()
   profiles.value = await profilesService.getProfiles()
 })
 
-const handleSubmit = () => {
-  console.log(selectedProfile)
-  // post
-  // update de la page
+const handleSubmit = async () => {
+  movieList.value = await moviesService.searchByProfile(selectedProfile.value);
 }
 </script>
 

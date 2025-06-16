@@ -1,8 +1,12 @@
 package fr.movieapp.external;
 
+import fr.movieapp.entities.ProfileEntity;
+import fr.movieapp.exceptions.ProfileEntityNotFoundException;
 import fr.movieapp.external.dto.MovieApiResponseDto;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Movie;
+import fr.movieapp.models.Profile;
+import fr.movieapp.repositories.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,32 +14,40 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
 public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService {
-    private final RestTemplate REST_TEMPLATE;
+    private final RestTemplate restTemplate;
     private final String TMBD_API_KEY;
     private final String TMBD_API_BASE_URL;
     private final String TMBD_MOST_RATED_MOVIES_API_PATH;
     private final String TMDB_POPULAR_MOVIES_API_PATH;
     private final String LANGUAGE;
     private final String SORT_BY;
+    private final ProfileRepository profileRepository;
+    private final int BEST_MOVIES_TOTAL_PAGES;
+    private final Random randomGenerator = new Random();
 
     public ApiMoviesWebClientServiceImpl(@Value("${TMDB_API_BASE_URL}") String baseUrl,
                                          @Value("${TMDB_MOST_RATED_MOVIES_API_PATH}") String mostRatedMoviesPath,
                                          @Value("${TMDB_POPULAR_MOVIES_API_PATH}") String popularMoviesPath,
                                          @Value("${TMDB_API_KEY}") String apiKey,
                                          @Value("${LANGUAGE}") String language,
-                                         @Value("${SORT_BY}") String sortBy) {
+                                         @Value("${SORT_BY}") String sortBy, ProfileRepository profileRepository,
+                                         @Value("${BEST_MOVIES_TOTAL_PAGES}") int bestMoviesTotalPages) {
         this.TMBD_API_BASE_URL = baseUrl;
         this.TMBD_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
         this.TMDB_POPULAR_MOVIES_API_PATH = popularMoviesPath;
         this.TMBD_API_KEY = apiKey;
         this.LANGUAGE = language;
         this.SORT_BY = sortBy;
-        this.REST_TEMPLATE = new RestTemplate();
+        this.profileRepository = profileRepository;
+        this.BEST_MOVIES_TOTAL_PAGES = bestMoviesTotalPages;
+        this.restTemplate = new RestTemplate();
     }
 
     @Override
@@ -43,21 +55,34 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
         return fetchMovies(TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
                 "?api_key=" + TMBD_API_KEY +
                 "&language=" + LANGUAGE +
-                "&sort_by=" + SORT_BY
+                "&sort_by=" + SORT_BY +
+                "&page=" + (randomGenerator.nextInt(BEST_MOVIES_TOTAL_PAGES) + 1)
+        ).subList(0, 10);
+    }
+
+    @Override
+    public List<Movie> getBestMovies() {
+        return fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
+                "?api_key=" + TMBD_API_KEY +
+                "&language=" + LANGUAGE +
+                "&page=" + (randomGenerator.nextInt(BEST_MOVIES_TOTAL_PAGES) + 1)
         );
     }
 
     @Override
-    public List<Movie> getPopularMovies() {
-        return fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
-                "?api_key=" + TMBD_API_KEY +
-                "&language=" + LANGUAGE
-        ).subList(0, 10);
+    public List<Movie> searchByProfile(int profileId) throws ProfileEntityNotFoundException {
+        ProfileEntity profileEntity = profileRepository.findById(profileId)
+                .orElseThrow(ProfileEntityNotFoundException::new);
+
+        return getBestMovies().stream()
+                .filter(movie -> movie.adult() == profileEntity.isAdult()
+                        && !Collections.disjoint(movie.genreList(), profileEntity.getGenreList()))
+                .toList();
     }
 
     public List<Movie> fetchMovies(String url) {
         try {
-            MovieApiResponseDto response = REST_TEMPLATE.getForObject(url, MovieApiResponseDto.class);
+            MovieApiResponseDto response = restTemplate.getForObject(url, MovieApiResponseDto.class);
 
             if (response == null) {
                 log.warn("api response is null");

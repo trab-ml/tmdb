@@ -14,4 +14,23 @@ export default class MoviesService {
 
         return movies
     }
+
+    public async searchByProfile(profileId) {
+        let profiles
+
+        await axios.get(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_BEST_MOVIES_BY_PROFILE_PATH,
+            {
+                params: {
+                    id: profileId
+                }
+            })
+            .then((response) => {
+                profiles = response.data;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+        return profiles
+    }
 }

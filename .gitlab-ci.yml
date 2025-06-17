@@ -11,6 +11,7 @@ backend-jar:
     - echo "BUILD_TAG=${BUILD_TAG}" >> build.env
   script:
     - echo "building jar..."
+    - cd backend
     - mvn clean package -Dmaven.test.skip=true
   after_script:
     - echo "finish step"

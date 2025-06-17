@@ -47,7 +47,6 @@ public class ApiMoviesWebClientServiceImplTest {
     @Mock static private ProfileRepository profileRepository;
     private int BEST_MOVIES_TOTAL_PAGES;
 
-
     private static final int HUNDRED_FIFTY_FOUR_ID = 654;
     private static final List<Genre> DRAMA_GENRE_LIST = List.of(
             Genre.DRAMA

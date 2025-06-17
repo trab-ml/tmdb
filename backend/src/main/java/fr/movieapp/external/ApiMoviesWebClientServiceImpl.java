@@ -80,7 +80,7 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
                 .toList();
     }
 
-    public List<Movie> fetchMovies(String url) {
+    private List<Movie> fetchMovies(String url) {
         try {
             MovieApiResponseDto response = restTemplate.getForObject(url, MovieApiResponseDto.class);
 

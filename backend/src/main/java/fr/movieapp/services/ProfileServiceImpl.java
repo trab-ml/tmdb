@@ -3,10 +3,8 @@ package fr.movieapp.services;
 import fr.movieapp.entities.ProfileEntity;
 import fr.movieapp.exceptions.AlreadyExistsException;
 import fr.movieapp.exceptions.ProfileEntityAlreadyExistsException;
-import fr.movieapp.exceptions.ProfileEntityNotFoundException;
 import fr.movieapp.external.ApiMoviesWebClientService;
 import fr.movieapp.mappers.ToModelMapper;
-import fr.movieapp.models.Movie;
 import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +25,6 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<Profile> getProfiles() {
-//        profileRepository.deleteAll();
         return ToModelMapper.entitiesToModel(
                 profileRepository.findAll()
         );

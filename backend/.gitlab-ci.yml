@@ -1,0 +1,20 @@
+stages:
+  - build
+
+backend-jar:
+  stage: build
+  image: maven:3.9.9
+  before_script:
+    - echo "starting backend-jar script..."
+    - export BUILD_TAG=$VERSION_PREFIX$VERSION
+    - 'echo "Tag: "$BUILD_TAG'
+    - echo "BUILD_TAG=${BUILD_TAG}" >> build.env
+  script:
+    - echo "building jar..."
+    - mvn clean package -Dmaven.test.skip=true
+  after_script:
+    - echo "finish step"
+  artifacts:
+    paths:
+      - target/movie-app-0.0.1-SNAPSHOT.jar
+    expire_in: 7 days

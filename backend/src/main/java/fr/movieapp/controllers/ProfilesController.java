@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/profiles")
 @CrossOrigin("http://localhost:5173")
-public class ProfileController {
+public class ProfilesController {
     private final ProfileService profileService;
 
-    public ProfileController(ProfileService profileService) {
+    public ProfilesController(ProfileService profileService) {
         this.profileService = profileService;
     }
 

@@ -1,10 +1,17 @@
 import axios from "axios";
 
 export default class MoviesService {
-    public async getPopularMovies() {
+    public async getMovies(bestMovies: boolean) {
         let movies
 
-        await axios.get(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_BEST_MOVIES_PATH)
+        let url: string
+        if (bestMovies) {
+            url = import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_BEST_MOVIES_PATH
+        } else {
+            url = import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_TOP_RATED_MOVIES_PATH
+        }
+
+        await axios.get(url)
             .then((response) => {
                 movies = response.data;
             })

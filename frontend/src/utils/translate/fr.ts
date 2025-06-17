@@ -4,7 +4,8 @@ export const fr = {
         logoTooltipText: 'Nextoo Movie DataBase',
         navbar: {
             popularMovies: 'Meilleurs films',
-            profile: 'Profil'
+            profile: 'Profil',
+            topRated: 'Mieux notés'
         },
     },
     popularMoviesPage: {
@@ -14,6 +15,9 @@ export const fr = {
             preLink: 'Liste de profil vide! Veuillez',
             link: 'créer',
             postLink: 'des profils avant.',
+        },
+        moviesContainer: {
+            outDate: 'sortie'
         }
     },
     profilePage: {
@@ -37,6 +41,9 @@ export const fr = {
             takeALook: 'Voir',
             noAssociatedGenre: 'Aucun genre associé', // TOUT
         }
+    },
+    topRatedPage: {
+        title: 'Les mieux notés'
     },
     notFoundPage: {
         info: 'Oups! page non trouvée!',

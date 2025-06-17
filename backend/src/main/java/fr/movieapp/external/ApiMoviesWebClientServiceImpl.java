@@ -5,7 +5,6 @@ import fr.movieapp.exceptions.ProfileEntityNotFoundException;
 import fr.movieapp.external.dto.MovieApiResponseDto;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Movie;
-import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +36,9 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
                                          @Value("${TMDB_POPULAR_MOVIES_API_PATH}") String popularMoviesPath,
                                          @Value("${TMDB_API_KEY}") String apiKey,
                                          @Value("${LANGUAGE}") String language,
-                                         @Value("${SORT_BY}") String sortBy, ProfileRepository profileRepository,
-                                         @Value("${BEST_MOVIES_TOTAL_PAGES}") int bestMoviesTotalPages) {
+                                         @Value("${SORT_BY}") String sortBy,
+                                         @Value("${BEST_MOVIES_TOTAL_PAGES}") int bestMoviesTotalPages,
+                                         ProfileRepository profileRepository) {
         this.TMBD_API_BASE_URL = baseUrl;
         this.TMBD_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
         this.TMDB_POPULAR_MOVIES_API_PATH = popularMoviesPath;

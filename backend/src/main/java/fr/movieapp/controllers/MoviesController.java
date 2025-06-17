@@ -1,7 +1,6 @@
 package fr.movieapp.controllers;
 
 import fr.movieapp.controllers.responses.MovieResponse;
-import fr.movieapp.controllers.responses.ProfileResponse;
 import fr.movieapp.exceptions.ProfileEntityNotFoundException;
 import fr.movieapp.external.ApiMoviesWebClientService;
 import fr.movieapp.mappers.ToResponseMapper;

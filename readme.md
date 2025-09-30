@@ -1,11 +1,8 @@
-# Movie App
+# Tourcoing Movie Data Base
 
 ```bash
-docker compose --env-file ~/IdeaProjects/movie-app/backend/.env up --build --force-recreate
+docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-recreate
 ```
-
-## Sources
-- [diapo présentation](https://docs.google.com/presentation/d/13uLOH1yNj8oW-ySYPnEYNvPRUdNFcMxxbsULwpQhmIM/edit?usp=sharing)
 
 ### back
 

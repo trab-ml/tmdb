@@ -1,7 +1,7 @@
 export const fr = {
     header: {
-        logoText: 'NMDB',
-        logoTooltipText: 'Nextoo Movie DataBase',
+        logoText: 'TMDB',
+        logoTooltipText: 'Tourcoing Movie DataBase',
         navbar: {
             popularMovies: 'Meilleurs films',
             profile: 'Profil',

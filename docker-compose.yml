@@ -1,7 +1,7 @@
 services:
   db:
     image: 'postgres:17-alpine'
-    container_name: movie-app-bdd
+    container_name: tmdb-bdd
     ports:
       - '${DB_LOCAL_PORT}:${DB_DOCKER_PORT}'
     environment:
@@ -13,8 +13,8 @@ services:
       - backend
 
   spring-service:
-    container_name: movie-app-back
-    build: ~/IdeaProjects/movie-app/backend
+    container_name: tmdb-back
+    build: ~/IdeaProjects/tmdb/backend
     depends_on:
       - db
     environment:
@@ -29,8 +29,8 @@ services:
       - backend
 
   vue-service:
-    build: ~/IdeaProjects/movie-app/frontend
-    container_name: movie-app-front
+    build: ~/IdeaProjects/tmdb/frontend
+    container_name: tmdb-front
     depends_on:
       - spring-service
     ports:

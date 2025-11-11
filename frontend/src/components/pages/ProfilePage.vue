@@ -18,10 +18,12 @@
               label="Genres"
               :items="Object.values(MovieGenre)"
               multiple
-              variant="outlined"
+              variant="plain"
               v-model="desiredGenres"
-              class="custom-v-select"
-              style="min-width: 8rem;"
+              class="custom-v-select sexier-select"
+              style="min-width: 8rem; border: 1px solid; border-radius: 0.5rem; padding-left: 0.8rem;"
+              :menu-props="{ contentClass: 'custom-dropdown' }"
+              :ripple="false"
           ></v-select>
         </v-container>
       </v-app>
@@ -73,8 +75,57 @@ form {
   justify-content: center;
 }
 
+.custom-v-select, .custom-v-select div {
+  border: none;
+}
+
 .custom-v-select div {
   height: 2rem !important;
   max-height: 2rem !important;
+}
+
+:deep(.v-select.sexier .v-field) {
+  background: none !important;
+}
+
+:deep(.v-select.sexier .v-field:hover),
+:deep(.v-select.sexier .v-field:focus),
+:deep(.v-select.sexier .v-field:focus-within) {
+  color: #000 !important;
+  font-size: x-large;
+  background: none;
+  border: .05rem solid;
+}
+</style>
+
+<style>
+.custom-dropdown .v-list-item:hover {
+  color: #f2f2f2 !important;
+  background-color: #000 !important;
+}
+
+.custom-dropdown .v-list-item__overlay {
+  display: none !important;
+}
+
+/* Disable ripple effect */
+.custom-dropdown .v-list-item .v-ripple__container {
+  display: none !important;
+}
+
+/* Disable all state overlays */
+.custom-dropdown .v-list-item::before,
+.custom-dropdown .v-list-item::after {
+  display: none !important;
+}
+
+/* Disable active state backgrounds */
+.custom-dropdown .v-list-item--active {
+  background: none !important;
+}
+
+.custom-dropdown .v-list-item--active:hover {
+  color: #f2f2f2 !important;
+  background-color: #000 !important;
 }
 </style>

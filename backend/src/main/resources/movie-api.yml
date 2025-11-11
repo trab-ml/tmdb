@@ -1,6 +1,6 @@
 api:
   movieapi:
     root:
-      url: ${TMDB_MOST_RATED_MOVIES_API_URL}
+      url: ${TMDB_MOST_RATED_MOVIES_API_PATH}
 
     TMDB_API_KEY: ${TMDB_API_KEY}

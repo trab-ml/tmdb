@@ -23,8 +23,10 @@
 
       <v-card-actions>
         <v-btn
-            color="orange-lighten-2"
             text="Explore"
+            class="sexier"
+            variant="text"
+            :ripple="false"
         ></v-btn>
 
         <v-spacer></v-spacer>
@@ -32,7 +34,7 @@
         <v-btn
             :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
             @click="show = !show"
-            class="cursor-pointer"
+            class="cursor-pointer sexier"
         ></v-btn>
       </v-card-actions>
 
@@ -69,15 +71,34 @@ const props = defineProps({
   padding: 1rem;
   border-radius: 1rem;
 }
+
 .movies-container > div {
   border: 1px solid black;
   padding: 10px;
 }
-.cover-img{
+
+.cover-img {
   transition: transform .1s !important;
   cursor: pointer;
 }
-.cover-img:hover{
+
+.cover-img:hover {
   transform: scale(1.1) !important;
+}
+
+:deep(.v-btn.sexier) {
+  background: none !important;
+  color: inherit !important;
+}
+
+:deep(.v-btn.sexier:hover),
+:deep(.v-btn.sexier:focus), /* A little point of reference doesn't hurt :) */
+:deep(.v-btn.sexier:active) {
+  color: #f2f2f2 !important;
+  background-color: #000 !important;
+}
+
+:deep(.v-btn.sexier .v-btn__overlay) {
+  opacity: 0 !important;
 }
 </style>

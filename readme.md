@@ -1,6 +1,16 @@
 # Tourcoing Movie Data Base
 
 ```bash
+# Option 1
+# a. run postgresql container (then activate the datasource)
+docker run -it -d -p 5432:5432 --name tmdb-bdd -e POSTGRES_PASSWORD=some_password postgres:17-alpine
+# b. then run backend (with maven or IntelliJ)
+mvn spring-boot:run
+# c. and frontend
+npm run dev
+
+# Option 2
+# run all containers (bdd, backend, frontend)
 docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-recreate
 ```
 

@@ -33,7 +33,7 @@
             :alt="$t('tableOfProfiles.body.minor')"/>
       </td>
       <td>
-        <div class="text-center">
+        <div class="text-center genres-list">
           <v-menu open-on-hover>
             <template v-slot:activator="{ props }">
               <p v-bind="props">
@@ -84,6 +84,10 @@ const onChange = () => {
 </script>
 
 <style scoped>
+.genres-list:hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 600px) {
   .result-table {
     width: 100%;

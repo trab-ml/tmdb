@@ -11,4 +11,4 @@ spring:
     import:
       - classpath:database.yml
       - classpath:movie-api.yml
-      - optional:classpath:actuator.yml
+      - optional:file:./.env[.properties]

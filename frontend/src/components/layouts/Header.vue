@@ -10,9 +10,13 @@
       </v-app-bar-title>
 
       <template v-slot:append>
-          <RouterLink to="/" >{{$t('header.navbar.popularMovies')}}</RouterLink>
-          <RouterLink to="/top-rated" style="margin-left: 0.5rem;">{{$t('header.navbar.topRated')}}</RouterLink>
-          <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem" class="text-decoration-none">{{$t('header.navbar.profile')}}</RouterLink>
+        <RouterLink to="/">
+          {{ $t('header.navbar.popularMovies') }}
+        </RouterLink>
+        <RouterLink to="/top-rated" style="margin-left: 0.5rem;">{{ $t('header.navbar.topRated') }}</RouterLink>
+        <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem">
+          {{ $t('header.navbar.profile') }}
+        </RouterLink>
       </template>
     </v-app-bar>
   </v-container>
@@ -47,6 +51,11 @@
 
 a {
   text-decoration: none !important;
+}
+
+.router-link-active.router-link-exact-active {
+  color: indigo;
+  border-bottom: 0.25rem solid;
 }
 
 </style>

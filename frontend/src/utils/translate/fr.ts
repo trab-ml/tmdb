@@ -17,7 +17,8 @@ export const fr = {
             postLink: 'des profils avant.',
         },
         moviesContainer: {
-            outDate: 'sortie'
+            outDate: 'sortie',
+            explore: 'Explorer',
         }
     },
     profilePage: {

@@ -1,13 +1,17 @@
 <template>
   <div class="movies-container">
     <v-card
-        v-for="movie in props.movieList"
+        v-for="movie in normalizedMovies"
+        :key="movie._uniqueId"
         class="mx-auto"
         max-width="344"
     >
       <v-img
-          height="200px"
-          :src="`https://image.tmdb.org/t/p/w500${movie.coverImgUrl}`"
+          height="186px"
+          :src="movie.coverImgUrl
+          ? `https://image.tmdb.org/t/p/w500${movie.coverImgUrl}`
+          : defaultCoverImg"
+          alt="Movie Cover"
           cover
           class="cover-img"
       ></v-img>
@@ -17,29 +21,29 @@
       </v-card-title>
 
       <v-card-subtitle style="display: flex; justify-content: space-between;">
-        <span class="d-inline">{{ $t('popularMoviesPage.moviesContainer.outDate') }}: {{ movie.releaseDate }}</span>
+        <span class="d-inline">{{ t('popularMoviesPage.moviesContainer.outDate') }}: {{ movie.releaseDate }}</span>
         <v-img v-if="movie.adult === true" :src="atLeastEighteen" alt=""/>
       </v-card-subtitle>
 
       <v-card-actions>
         <v-btn
-            text="Explore"
+            text
             class="sexier"
             variant="text"
             :ripple="false"
-        ></v-btn>
+        >{{ t('popularMoviesPage.moviesContainer.explore') }}</v-btn>
 
         <v-spacer></v-spacer>
 
         <v-btn
-            :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-            @click="show = !show"
+            :icon="isExpanded(movie) ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+            @click="toggleExpand(movie)"
             class="cursor-pointer sexier"
         ></v-btn>
       </v-card-actions>
 
-      <v-expand-transition>
-        <div v-show="show">
+      <v-expand-transition v-if="isExpanded(movie)">
+        <div>
           <v-divider></v-divider>
 
           <v-card-text>
@@ -52,13 +56,46 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
 import atLeastEighteen from "/src/assets/-18-32px.png"
+import defaultCoverImg from "/src/assets/best-movie-slogan.png"
+import {useI18n} from "vue-i18n"
+import {ref, watch} from "vue"
 
-let show = ref(false)
+interface Movie {
+  id?: number | string
+  title: string
+  coverImgUrl?: string
+  releaseDate?: string
+  adult?: boolean
+  overview?: string,
+  _uniqueId?: string
+}
 
-const props = defineProps({
-  movieList: Array
+const props = defineProps<{ movieList: Movie[] }>()
+const { t } = useI18n()
+
+const normalizedMovies = ref<Movie[]>([])
+const expandedMap = ref<Map<string, boolean>>(new Map())
+
+function isExpanded(movie: Movie): boolean {
+  return !!expandedMap.value.get(movie._uniqueId!) || false
+}
+
+function toggleExpand(movie: Movie): void {
+  const id = movie._uniqueId!
+  const currentState = expandedMap.value.get(id) || false
+
+  expandedMap.value.clear()
+  expandedMap.value.set(id, !currentState)
+}
+
+watch(() => props.movieList, (newList) => {
+  if (newList && newList.length > 0) {
+    normalizedMovies.value = newList.map((movie) => ({
+      ...movie,
+      _uniqueId: crypto.randomUUID()
+    }))
+  }
 })
 </script>
 
@@ -66,6 +103,8 @@ const props = defineProps({
 .movies-container {
   display: grid;
   grid-template-columns: 18rem 18rem 18rem 18rem;
+  grid-auto-rows: min-content;
+  align-items: start;
   background-color: #f2f2f2;
   gap: 1rem;
   padding: 1rem;
@@ -73,6 +112,7 @@ const props = defineProps({
 }
 
 .movies-container > div {
+  align-self: start;
   border: 1px solid black;
   padding: 10px;
 }

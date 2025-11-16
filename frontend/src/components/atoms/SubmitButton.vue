@@ -1,7 +1,8 @@
-<template class="custom-actions">
+<template>
   <v-btn
       class="d-flex mx-auto bg-grey-lighten-2 sexier"
       type="submit"
+      aria-disabled="true"
   >
     {{ props.value }}
   </v-btn>
@@ -28,5 +29,12 @@ const props = defineProps({
 
 .v-btn.sexier .v-btn__overlay {
   opacity: 0 !important;
+}
+
+.v-btn:disabled {
+  cursor: not-allowed !important;
+  color: grey !important;
+  border-color: grey !important;
+  background-color: #e0e0e0 !important;
 }
 </style>

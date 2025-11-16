@@ -4,18 +4,18 @@
       <v-app-bar-title>
         <RouterLink to="/">
           <div class="tooltip">
-            {{$t('header.logoText')}} <span class="tooltiptext"> {{$t('header.logoTooltipText')}} </span>
+            {{t('header.logoText')}} <span class="tooltiptext"> {{t('header.logoTooltipText')}} </span>
           </div>
         </RouterLink>
       </v-app-bar-title>
 
       <template v-slot:append>
         <RouterLink to="/">
-          {{ $t('header.navbar.popularMovies') }}
+          {{ t('header.navbar.popularMovies') }}
         </RouterLink>
-        <RouterLink to="/top-rated" style="margin-left: 0.5rem;">{{ $t('header.navbar.topRated') }}</RouterLink>
+        <RouterLink to="/top-rated" style="margin-left: 0.5rem;">{{ t('header.navbar.topRated') }}</RouterLink>
         <RouterLink to="/profile" style="margin-left: 0.5rem; margin-right: 1rem">
-          {{ $t('header.navbar.profile') }}
+          {{ t('header.navbar.profile') }}
         </RouterLink>
       </template>
     </v-app-bar>
@@ -23,6 +23,9 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n"
+
+const {t} = useI18n()
 </script>
 
 <style scoped>
@@ -54,7 +57,7 @@ a {
 }
 
 .router-link-active.router-link-exact-active {
-  color: indigo;
+  color: var(--main-color);
   border-bottom: 0.25rem solid;
 }
 

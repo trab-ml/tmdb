@@ -4,12 +4,18 @@
     <h1>{{ t('popularMoviesPage.title') }}</h1>
 
     <form action="" @submit.prevent="handleSubmit">
-      <TableOfProfiles v-if="profiles.length > 0" :items="profiles" :formMode="true"
-                       @getInputValue="v => selectedProfile = v"/>
-
-      <SubmitButton v-if="profiles.length > 0" :value="t('popularMoviesPage.submitButtonText')"
-                    class="search-button"
-                    :disabled="selectedProfile === ''"/>
+      <div v-if="profiles.length > 0" class="d-flex flex-row align-center"
+           style="display: flex; border: 1px solid #e0e0e0; border-radius: 1.5rem 1.5rem 0.1rem 0.1rem; border-bottom: none;">
+        <TableOfProfiles :items="profiles" :formMode="true"
+                         @getInputValue="v => selectedProfile = v"
+                         style="width: 75%;"/>
+        <div style="width: 25%; display: flex; flex-direction: row; justify-items: center; align-items: center;">
+          <SubmitButton :value="t('popularMoviesPage.submitButtonText')"
+                        class="search-button"
+                        style="margin: 0 auto;"
+                        :disabled="selectedProfile === ''"/>
+        </div>
+      </div>
       <p v-else>
         {{ t('popularMoviesPage.emptyProfileList.preLink') }}
         <RouterLink to="/profile">{{ t('popularMoviesPage.emptyProfileList.link') }}</RouterLink>
@@ -30,13 +36,14 @@ import ProfilesService from "../../services/ProfilesService.ts"
 import SubmitButton from "../atoms/SubmitButton.vue"
 import MoviesContainer from "../organisms/MoviesContainer.vue"
 import {useI18n} from "vue-i18n"
+import type {IMovie, IProfile} from "../../types/global.ts"
 
 const {t} = useI18n()
-let movieList = ref()
+const movieList = ref<IMovie[]>([])
 const moviesService = new MoviesService()
 const profilesService = new ProfilesService()
-const profiles = ref([])
-let selectedProfile = ref('')
+const profiles = ref<IProfile[]>([])
+const selectedProfile = ref<string>('')
 
 onMounted(async () => {
   movieList.value = await moviesService.getMovies(true)
@@ -44,7 +51,7 @@ onMounted(async () => {
 })
 
 const handleSubmit = async () => {
-  movieList.value = await moviesService.searchByProfile(selectedProfile.value);
+  movieList.value = await moviesService.searchByProfile(selectedProfile.value)
 }
 </script>
 

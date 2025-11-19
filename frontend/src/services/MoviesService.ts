@@ -1,8 +1,9 @@
-import axios from "axios";
+import axios from "axios"
+import type {IMovie} from "../types/global.ts"
 
 export default class MoviesService {
-    public async getMovies(bestMovies: boolean) {
-        let movies
+    public async getMovies(bestMovies: boolean): Promise<IMovie[]> {
+        let movies: IMovie[] = []
 
         let url: string
         if (bestMovies) {
@@ -13,7 +14,7 @@ export default class MoviesService {
 
         await axios.get(url)
             .then((response) => {
-                movies = response.data;
+                movies = response.data ?? []
             })
             .catch((error) => {
                 console.log(error)
@@ -22,8 +23,8 @@ export default class MoviesService {
         return movies
     }
 
-    public async searchByProfile(profileId) {
-        let profiles
+    public async searchByProfile(profileId: string): Promise<IMovie[]> {
+        let movies: IMovie[] = []
 
         await axios.get(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_BEST_MOVIES_BY_PROFILE_PATH,
             {
@@ -32,12 +33,12 @@ export default class MoviesService {
                 }
             })
             .then((response) => {
-                profiles = response.data;
+                movies = response.data ?? [];
             })
             .catch((error) => {
                 console.log(error)
             })
 
-        return profiles
+        return movies
     }
 }

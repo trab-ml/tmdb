@@ -1,10 +1,12 @@
-import axios from "axios";
+import axios from "axios"
+import type {IProfile} from "../types/global.ts"
+import type {TSubmitPayload} from "../components/pages/ProfilePage.vue"
 
 export default class ProfilesService {
-    private readonly CONTENT_TYPE_APPLICATION_JSON = { "Content-Type": "application/json" };
+    private readonly CONTENT_TYPE_APPLICATION_JSON = { "Content-Type": "application/json" }
 
-    public async getProfiles() {
-        let profiles
+    public async getProfiles(): Promise<IProfile[]> {
+        let profiles: IProfile[] = []
 
         await axios.get(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_PROFILES_PATH)
             .then((response) => {
@@ -17,20 +19,11 @@ export default class ProfilesService {
         return profiles
     }
 
-    public async addProfile(toSubmit){
-        let status: string = 'OK' // to add feedback to user
-
-        await axios.post(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_PROFILES_PATH,
+    public async addProfile(toSubmit: TSubmitPayload){
+        return await axios.post(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_PROFILES_PATH,
             toSubmit,
             {
                 headers: this.CONTENT_TYPE_APPLICATION_JSON,
             })
-            .then((response) => console.log(response))
-            .catch((error) => {
-                status = "KO"
-                console.log(error)
-            })
-
-        return status;
     }
 }

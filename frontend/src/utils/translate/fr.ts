@@ -11,6 +11,7 @@ export const fr = {
     popularMoviesPage: {
         title: 'Meilleurs Films',
         submitButtonText: 'Rechercher',
+        noMovieFound: 'Aucun film trouvé pour ce profil.',
         emptyProfileList: {
             preLink: 'Liste de profil vide! Veuillez',
             link: 'créer',
@@ -45,6 +46,12 @@ export const fr = {
     },
     topRatedPage: {
         title: 'Les mieux notés'
+    },
+    footer: {
+        github: {
+            title: "Github",
+            link: "https://github.com/trab-ml"
+        }
     },
     notFoundPage: {
         info: 'Oups! page non trouvée!',

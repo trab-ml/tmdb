@@ -14,7 +14,7 @@ import MoviesContainer from "../organisms/MoviesContainer.vue"
 import {useI18n} from "vue-i18n"
 
 const {t} = useI18n()
-let movieList = ref()
+let movieList = ref([])
 const moviesService = new MoviesService()
 
 onMounted(async () => {

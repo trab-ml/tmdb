@@ -1,5 +1,5 @@
 <template>
-  <div class="movies-container">
+  <div v-if="normalizedMovies.length > 0" class="movies-container">
     <v-card
         v-for="movie in normalizedMovies"
         :key="movie._uniqueId"
@@ -31,6 +31,7 @@
             class="sexier"
             variant="text"
             :ripple="false"
+            style="cursor: default"
         >{{ t('popularMoviesPage.moviesContainer.explore') }}</v-btn>
 
         <v-spacer></v-spacer>
@@ -60,28 +61,19 @@ import atLeastEighteen from "/src/assets/-18-32px.png"
 import defaultCoverImg from "/src/assets/best-movie-slogan.png"
 import {useI18n} from "vue-i18n"
 import {ref, watch} from "vue"
+import type {IMovie} from "../../types/global.ts"
 
-interface Movie {
-  id?: number | string
-  title: string
-  coverImgUrl?: string
-  releaseDate?: string
-  adult?: boolean
-  overview?: string,
-  _uniqueId?: string
-}
-
-const props = defineProps<{ movieList: Movie[] }>()
+const props = defineProps<{ movieList: IMovie[] }>()
 const { t } = useI18n()
 
-const normalizedMovies = ref<Movie[]>([])
+const normalizedMovies = ref<IMovie[]>([])
 const expandedMap = ref<Map<string, boolean>>(new Map())
 
-function isExpanded(movie: Movie): boolean {
+function isExpanded(movie: IMovie): boolean {
   return !!expandedMap.value.get(movie._uniqueId!) || false
 }
 
-function toggleExpand(movie: Movie): void {
+function toggleExpand(movie: IMovie): void {
   const id = movie._uniqueId!
   const currentState = expandedMap.value.get(id) || false
 
@@ -107,8 +99,10 @@ watch(() => props.movieList, (newList) => {
   align-items: start;
   background-color: #f2f2f2;
   gap: 1rem;
+  margin: 0 0 1rem;
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 0 0 1rem 1rem;
+  border-top: none;
 }
 
 .movies-container > div {

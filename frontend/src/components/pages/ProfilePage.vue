@@ -1,14 +1,14 @@
 <template>
   <Header />
-  <main style="width: 100%; position: relative; display: flex; flex-direction: column; justify-items: center; align-items: center">
-    <h1>{{$t('profilePage.title')}}</h1>
+  <main id="wrapper" style="overflow: hidden;">
+    <h1>{{ t('profilePage.title') }}</h1>
 
-    <h2>{{$t('profilePage.formTitle')}}</h2>
+    <h2>{{ t('profilePage.formTitle') }}</h2>
     <form
         action=""
-        @submit="handleSubmit"
+        @submit.prevent="handleSubmit"
         style="border: 1px solid; border-radius: 1rem; padding: 1rem 0.5rem">
-      <CheckboxField :label="$t('profilePage.adultCheckboxLabel')" @getInputValue="(v: boolean) => toSubmit.isAdult = v"/>
+      <CheckboxField :label="t('profilePage.adultCheckboxLabel')" @getInputValue="(v: boolean) => toSubmit.adult = v"/>
 
       <v-app style="max-height: 6rem !important; padding: 0 !important; margin: 0 !important;" class="d-flex custom-v-app">
         <v-container style="padding: 0 !important; margin: 0 !important;">
@@ -16,7 +16,7 @@
               clearable
               chips
               label="Genres"
-              :items="Object.values(MovieGenre)"
+              :items="Object.values(EMovieGenre)"
               multiple
               variant="plain"
               v-model="desiredGenres"
@@ -28,37 +28,39 @@
         </v-container>
       </v-app>
 
-      <SubmitButton class="mt-3" :value="$t('profilePage.submitButtonText')"/>
+      <SubmitButton class="mt-3" :value="t('profilePage.submitButtonText')"/>
     </form>
 
-    <TableOfProfiles v-if="profiles.length > 0" :items="profiles" />
-    <p v-else>{{$t('profilePage.noSavedGenre')}}</p>
+    <TableOfProfiles v-if="profiles.length > 0" :items="profiles" :formMode="false" />
+    <p v-else>{{t('profilePage.noSavedGenre')}}</p>
   </main>
 </template>
 
 <script setup lang="ts">
 import Header from "../layouts/Header.vue"
 import CheckboxField from "../atoms/CheckboxField.vue"
-import {MovieGenre} from "../../types/global.ts"
+import {EMovieGenre, type IProfile} from "../../types/global.ts"
 import SubmitButton from "../atoms/SubmitButton.vue"
 import ProfilesService from "../../services/ProfilesService.ts"
 import TableOfProfiles from "../organisms/TableOfProfiles.vue"
 import {onMounted, ref} from "vue"
+import {useI18n} from "vue-i18n"
 
-const toSubmit = {
-  isAdult: false,
-  genreIdsList: [],
-};
+const {t} = useI18n()
+
+export type TSubmitPayload = {
+  adult: boolean,
+  commaSeperatedGenres: string
+}
+const toSubmit = ref<TSubmitPayload>()
 
 const profilesService = new ProfilesService()
-const profiles = ref([])
-const desiredGenres = ref([])
+const profiles = ref<IProfile[]>([])
+const desiredGenres = ref<EMovieGenre[]>([])
 
 const handleSubmit = () => {
-  toSubmit.genreIdsList = desiredGenres.value.join(',')
-  console.log(toSubmit)
-
-  profilesService.addProfile(toSubmit);
+  toSubmit.value.commaSeperatedGenres = desiredGenres.value.join(',')
+  profilesService.addProfile(toSubmit.value)
 }
 
 onMounted(async () => {
@@ -67,6 +69,16 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+#wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin: 1rem 0 0 1rem;
+}
+
 form {
   display: flex;
   flex-direction: row;

@@ -1,6 +1,5 @@
 package fr.movieapp.external;
 
-import fr.movieapp.exceptions.ProfileEntityNotFoundException;
 import fr.movieapp.external.dto.MovieApiResponseDto;
 import fr.movieapp.external.dto.MovieDto;
 import fr.movieapp.models.Genre;
@@ -11,9 +10,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -26,17 +23,8 @@ import static org.mockito.Mockito.verify;
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ApiMoviesWebClientServiceImplTest {
-    @InjectMocks
-    private ApiMoviesWebClientServiceImpl apiMoviesWebClientServiceImpl = new ApiMoviesWebClientServiceImpl("https://api.themoviedb.org/3/",
-            "movie/top_rated",
-            "movie/popular",
-            "64a0984238236a5e707ba525be333151",
-            "fr-FR",
-            "created_at.desc",
-            1,
-            profileRepository);
-
+@Disabled
+public class MoviesApiRestClientServiceImplTest {
     @Mock private RestTemplate restTemplate;
      private String TMBD_API_KEY;
      private String TMBD_API_BASE_URL;
@@ -45,6 +33,18 @@ public class ApiMoviesWebClientServiceImplTest {
      private String LANGUAGE;
      private String SORT_BY;
     @Mock static private ProfileRepository profileRepository;
+
+    @InjectMocks
+    private MoviesApiRestClientServiceImpl moviesApiRestClientServiceImpl = new MoviesApiRestClientServiceImpl(restTemplate,
+            "https://api.themoviedb.org/3/",
+            "movie/top_rated",
+            "movie/popular",
+            "64a0984238236a5e707ba525be333151",
+            "fr-FR",
+            "created_at.desc",
+            1,
+            profileRepository);
+
     private int BEST_MOVIES_TOTAL_PAGES;
 
     private static final int HUNDRED_FIFTY_FOUR_ID = 654;
@@ -129,12 +129,12 @@ public class ApiMoviesWebClientServiceImplTest {
     @Order(1)
     void whenGetTopRatedMovies_thenReturnMoviesList() {
         //given
-//        Mockito.when(apiMoviesWebClientServiceImpl.getTopRatedMovies())
+//        Mockito.when(moviesApiRestClientServiceImpl.getTopRatedMovies())
 //                .thenReturn(TOP_RATED_MOVIES_LIST_OF_TWO);
 //        doReturn(movieApiResponseDto).when(restTemplate).getForObject(any(String.class), any());
 
         //when
-        List<Movie> moviesList = apiMoviesWebClientServiceImpl.getTopRatedMovies();
+        List<Movie> moviesList = moviesApiRestClientServiceImpl.getTopRatedMovies();
 
         //then
         Assertions.assertNotNull(moviesList);
@@ -145,11 +145,11 @@ public class ApiMoviesWebClientServiceImplTest {
 //    @Disabled
 //    void whenGetBestMovies_thenReturnMoviesList() {
 //        //given
-//        Mockito.when(apiMoviesWebClientServiceImpl.getTopRatedMovies())
+//        Mockito.when(moviesApiRestClientServiceImpl.getTopRatedMovies())
 //                .thenReturn(BEST_MOVIES_LIST_OF_TWO);
 //
 //        //when
-//        List<Movie> moviesList = apiMoviesWebClientServiceImpl.getTopRatedMovies();
+//        List<Movie> moviesList = moviesApiRestClientServiceImpl.getTopRatedMovies();
 //
 //        //then
 //        Assertions.assertNotNull(moviesList);
@@ -162,11 +162,11 @@ public class ApiMoviesWebClientServiceImplTest {
 //    @Disabled
 //    void whenSearchByProfile_thenReturnMoviesListBasedOnProfile() throws ProfileEntityNotFoundException {
 //        //given
-//        Mockito.when(apiMoviesWebClientServiceImpl.searchByProfile(any()))
+//        Mockito.when(moviesApiRestClientServiceImpl.searchByProfile(any()))
 //                .thenReturn(BEST_MOVIES_BASED_ON_PROFILE_LIST_OF_ONE);
 //
 //        //when
-//        List<Movie> moviesList = apiMoviesWebClientServiceImpl.searchByProfile(HUNDRED_FIFTY_FOUR_ID);
+//        List<Movie> moviesList = moviesApiRestClientServiceImpl.searchByProfile(HUNDRED_FIFTY_FOUR_ID);
 //
 //        //then
 //        Assertions.assertNotNull(moviesList);

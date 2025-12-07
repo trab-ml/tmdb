@@ -12,3 +12,6 @@ spring:
       - classpath:database.yml
       - classpath:movie-api.yml
       - optional:file:./.env[.properties]
+
+frontend:
+  url: ${FRONT_URL}

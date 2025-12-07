@@ -3,7 +3,7 @@ package fr.movieapp.services;
 import fr.movieapp.entities.ProfileEntity;
 import fr.movieapp.exceptions.AlreadyExistsException;
 import fr.movieapp.exceptions.ProfileEntityAlreadyExistsException;
-import fr.movieapp.external.ApiMoviesWebClientService;
+import fr.movieapp.external.MoviesApiRestClientService;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;
@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository profileRepository;
-    private final ApiMoviesWebClientService apiMoviesWebClientService;
+    private final MoviesApiRestClientService moviesApiRestClientService;
 
-    public ProfileServiceImpl(ProfileRepository profileRepository, ApiMoviesWebClientService apiMoviesWebClientService) {
+    public ProfileServiceImpl(ProfileRepository profileRepository, MoviesApiRestClientService moviesApiRestClientService) {
         this.profileRepository = profileRepository;
-        this.apiMoviesWebClientService = apiMoviesWebClientService;
+        this.moviesApiRestClientService = moviesApiRestClientService;
     }
 
     @Override

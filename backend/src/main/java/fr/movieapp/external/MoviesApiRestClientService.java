@@ -5,7 +5,7 @@ import fr.movieapp.models.Movie;
 
 import java.util.List;
 
-public interface ApiMoviesWebClientService {
+public interface MoviesApiRestClientService {
     List<Movie> getTopRatedMovies();
     List<Movie> getBestMovies();
     List<Movie> searchByProfile(int profileId) throws ProfileEntityNotFoundException;

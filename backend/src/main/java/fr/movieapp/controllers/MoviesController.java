@@ -2,7 +2,7 @@ package fr.movieapp.controllers;
 
 import fr.movieapp.controllers.responses.MovieResponse;
 import fr.movieapp.exceptions.ProfileEntityNotFoundException;
-import fr.movieapp.external.ApiMoviesWebClientService;
+import fr.movieapp.external.MoviesApiRestClientService;
 import fr.movieapp.mappers.ToResponseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,23 +15,23 @@ import java.util.List;
 @RequestMapping("/movies")
 @CrossOrigin("http://localhost:5173")
 public class MoviesController {
-    private final ApiMoviesWebClientService apiMoviesWebClientService;
+    private final MoviesApiRestClientService moviesApiRestClientService;
 
-    MoviesController(ApiMoviesWebClientService apiMoviesWebClientService) {
-        this.apiMoviesWebClientService = apiMoviesWebClientService;
+    public MoviesController(MoviesApiRestClientService moviesApiRestClientService) {
+        this.moviesApiRestClientService = moviesApiRestClientService;
     }
 
     @GetMapping("/top-rated")
     public ResponseEntity<List<MovieResponse>> getMovies() {
         return ResponseEntity.ok().body(
-                ToResponseMapper.toResponse(apiMoviesWebClientService.getTopRatedMovies())
+                ToResponseMapper.toResponse(moviesApiRestClientService.getTopRatedMovies())
         );
     }
 
     @GetMapping("/best-movies")
     public ResponseEntity<List<MovieResponse>> getPopularMovies() {
         return ResponseEntity.ok().body(
-                ToResponseMapper.toResponse(apiMoviesWebClientService.getBestMovies())
+                ToResponseMapper.toResponse(moviesApiRestClientService.getBestMovies())
                         .subList(0, 10)
         );
     }
@@ -39,6 +39,6 @@ public class MoviesController {
     @GetMapping("/best-movies-by-profile")
     public ResponseEntity<List<MovieResponse>> searchByProfile(@RequestParam String id) throws ProfileEntityNotFoundException {
         return ResponseEntity.ok()
-                .body(ToResponseMapper.toResponse(apiMoviesWebClientService.searchByProfile(Integer.parseInt(id))));
+                .body(ToResponseMapper.toResponse(moviesApiRestClientService.searchByProfile(Integer.parseInt(id))));
     }
 }

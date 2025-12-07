@@ -7,6 +7,7 @@ import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Movie;
 import fr.movieapp.repositories.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -19,7 +20,7 @@ import java.util.Random;
 
 @Slf4j
 @Service
-public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService {
+public class MoviesApiRestClientServiceImpl implements MoviesApiRestClientService {
     private final RestTemplate restTemplate;
     private final String TMBD_API_KEY;
     private final String TMBD_API_BASE_URL;
@@ -31,14 +32,16 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
     private final int BEST_MOVIES_TOTAL_PAGES;
     private final Random randomGenerator = new Random();
 
-    public ApiMoviesWebClientServiceImpl(@Value("${TMDB_API_BASE_URL}") String baseUrl,
-                                         @Value("${TMDB_MOST_RATED_MOVIES_API_PATH}") String mostRatedMoviesPath,
-                                         @Value("${TMDB_POPULAR_MOVIES_API_PATH}") String popularMoviesPath,
-                                         @Value("${TMDB_API_KEY}") String apiKey,
-                                         @Value("${LANGUAGE}") String language,
-                                         @Value("${SORT_BY}") String sortBy,
-                                         @Value("${BEST_MOVIES_TOTAL_PAGES}") int bestMoviesTotalPages,
-                                         ProfileRepository profileRepository) {
+    public MoviesApiRestClientServiceImpl(RestTemplate restTemplate,
+                                          @Value("${TMDB_API_BASE_URL}") String baseUrl,
+                                          @Value("${TMDB_MOST_RATED_MOVIES_API_PATH}") String mostRatedMoviesPath,
+                                          @Value("${TMDB_POPULAR_MOVIES_API_PATH}") String popularMoviesPath,
+                                          @Value("${TMDB_API_KEY}") String apiKey,
+                                          @Value("${LANGUAGE}") String language,
+                                          @Value("${SORT_BY}") String sortBy,
+                                          @Value("${BEST_MOVIES_TOTAL_PAGES}") int bestMoviesTotalPages,
+                                          ProfileRepository profileRepository) {
+        this.restTemplate = restTemplate;
         this.TMBD_API_BASE_URL = baseUrl;
         this.TMBD_MOST_RATED_MOVIES_API_PATH = mostRatedMoviesPath;
         this.TMDB_POPULAR_MOVIES_API_PATH = popularMoviesPath;
@@ -47,7 +50,6 @@ public class ApiMoviesWebClientServiceImpl implements ApiMoviesWebClientService 
         this.SORT_BY = sortBy;
         this.profileRepository = profileRepository;
         this.BEST_MOVIES_TOTAL_PAGES = bestMoviesTotalPages;
-        this.restTemplate = new RestTemplate();
     }
 
     @Override

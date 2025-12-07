@@ -52,13 +52,23 @@ export type TSubmitPayload = {
   adult: boolean,
   commaSeperatedGenres: string
 }
-const toSubmit = ref<TSubmitPayload>()
+const toSubmit = ref<TSubmitPayload>({
+  adult: false,
+  commaSeperatedGenres: ''
+})
 
 const profilesService = new ProfilesService()
 const profiles = ref<IProfile[]>([])
 const desiredGenres = ref<EMovieGenre[]>([])
 
 const handleSubmit = () => {
+  // if (!toSubmit.value) {
+  //   toSubmit.value = {
+  //     adult: false,
+  //     commaSeperatedGenres: ''
+  //   }
+  // }
+
   toSubmit.value.commaSeperatedGenres = desiredGenres.value.join(',')
   profilesService.addProfile(toSubmit.value)
 }

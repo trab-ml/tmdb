@@ -12,9 +12,10 @@ import MoviesService from "../../services/MoviesService.ts"
 import {onMounted, ref} from "vue"
 import MoviesContainer from "../organisms/MoviesContainer.vue"
 import {useI18n} from "vue-i18n"
+import type {IMovie} from "../../types/global.ts";
 
 const {t} = useI18n()
-let movieList = ref([])
+let movieList = ref<IMovie[]>([])
 const moviesService = new MoviesService()
 
 onMounted(async () => {

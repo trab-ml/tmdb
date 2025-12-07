@@ -16,8 +16,6 @@ docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-re
 
 ### back
 
-- [gitlab](https://gitlab.tools.nextoo.fr/nextoo-academy-tp/btraore/movie-app#)
-- [issue board](https://gitlab.tools.nextoo.fr/nextoo-academy-tp/btraore/movie-app/-/boards)
 - [TMDB](https://developer.themoviedb.org/docs/getting-started)
     - [rated movies](https://developer.themoviedb.org/reference/guest-session-rated-movies)
     - [get a movie img](https://developer.themoviedb.org/reference/movie-images)

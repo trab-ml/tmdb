@@ -6,8 +6,7 @@ import fr.movieapp.external.dto.MovieApiResponseDto;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Movie;
 import fr.movieapp.repositories.ProfileRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -18,9 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-@Slf4j
 @Service
 public class MoviesApiRestClientServiceImpl implements MoviesApiRestClientService {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(MoviesApiRestClientServiceImpl.class);
+
     private final RestTemplate restTemplate;
     private final String TMBD_API_KEY;
     private final String TMBD_API_BASE_URL;
@@ -54,12 +54,14 @@ public class MoviesApiRestClientServiceImpl implements MoviesApiRestClientServic
 
     @Override
     public List<Movie> getTopRatedMovies() {
-        return fetchMovies(TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
+        List<Movie> movies = fetchMovies(TMBD_API_BASE_URL + TMBD_MOST_RATED_MOVIES_API_PATH +
                 "?api_key=" + TMBD_API_KEY +
                 "&language=" + LANGUAGE +
                 "&sort_by=" + SORT_BY +
                 "&page=" + (randomGenerator.nextInt(BEST_MOVIES_TOTAL_PAGES) + 1)
-        ).subList(0, 10);
+        );
+
+        return movies.size() > 10 ? movies.subList(0, 10) : movies;
     }
 
     @Override

@@ -7,20 +7,16 @@ import fr.movieapp.external.MoviesApiRestClientService;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository profileRepository;
-    private final MoviesApiRestClientService moviesApiRestClientService;
 
-    public ProfileServiceImpl(ProfileRepository profileRepository, MoviesApiRestClientService moviesApiRestClientService) {
+    public ProfileServiceImpl(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
-        this.moviesApiRestClientService = moviesApiRestClientService;
     }
 
     @Override

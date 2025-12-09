@@ -2,9 +2,7 @@ package fr.movieapp.entities;
 
 import fr.movieapp.models.Genre;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(
         schema = "public",
         name = "profile_entity",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"adult", "genre_list"})})
+@Builder
 public class ProfileEntity {
     @Id
     @GeneratedValue

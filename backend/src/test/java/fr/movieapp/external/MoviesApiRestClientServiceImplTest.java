@@ -7,7 +7,6 @@ import fr.movieapp.external.dto.MovieDto;
 import fr.movieapp.models.Genre;
 import fr.movieapp.models.Movie;
 import fr.movieapp.repositories.ProfileRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 
-@Slf4j
 @ExtendWith(MockitoExtension.class)
 public class MoviesApiRestClientServiceImplTest {
     @Mock

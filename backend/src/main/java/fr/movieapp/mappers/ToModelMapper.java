@@ -27,7 +27,10 @@ public class ToModelMapper {
                 dto.title(),
                 dto.overview(),
                 dto.coverImgUrl(),
-                LocalDate.parse(dto.releaseDate())
+                LocalDate.parse(dto.releaseDate() != null
+                        ? dto.releaseDate()
+                        : "1900-01-01"
+                )
         );
     }
 

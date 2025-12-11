@@ -89,10 +89,4 @@ public class ToModelMapper {
                 req.genreIdsList().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.genreIdsList().get())
         );
     }
-
-    public static List<Profile> toModel(List<ProfileRequest> req) {
-        return req.stream()
-                .map(ToModelMapper::toModel)
-                .toList();
-    }
 }

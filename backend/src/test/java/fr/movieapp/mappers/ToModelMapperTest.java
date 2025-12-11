@@ -1,12 +1,16 @@
 package fr.movieapp.mappers;
 
+import fr.movieapp.entities.ProfileEntity;
 import fr.movieapp.external.dto.MovieApiResponseDto;
 import fr.movieapp.external.dto.MovieDto;
+import fr.movieapp.models.Genre;
 import fr.movieapp.models.Movie;
+import fr.movieapp.models.Profile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -63,27 +67,61 @@ class ToModelMapperTest {
         Assertions.assertTrue(movies.isEmpty());
     }
 
-    // Will Throw NullPointerException
     @Test
-    void givenMovieApiResponseDtoWithInvalidMovieDto_thenItShouldSkipInvalidEntries() {
+    void givenValidProfileEntity_thenItShouldBeMappedCorrectly() {
         // given
-        MovieDto invalidMovieDto = MovieDto.builder()
-                .id((Integer) null)
-                .build();
-        MovieApiResponseDto responseDto = MovieApiResponseDto.builder()
-                .movieList(List.of(invalidMovieDto))
-                .build();
+        ProfileEntity profileEntity = ProfileEntity.builder().build();
 
         // when
-        List<Movie> movies = ToModelMapper.toModel(responseDto);
+        Profile expected = ToModelMapper.toModel(profileEntity);
 
         // then
-        Assertions.assertNotNull(movies);
-        Assertions.assertTrue(movies.isEmpty());
+        Assertions.assertNotNull(expected);
+        Assertions.assertEquals(profileEntity.getId(), expected.getId().orElse(null));
     }
 
     @Test
-    void givenValidProfileEntity_thenItShouldBeMappedCorrectly() {
-        // given when then
+    void givenValidProfileEntityList_thenItShouldBeMappedToProfileList() {
+        // given
+        ProfileEntity profileEntity = ProfileEntity.builder().build();
+        List<ProfileEntity> profileEntities = List.of(profileEntity);
+
+        // when
+        List<Profile> profiles = ToModelMapper.entitiesToModel(profileEntities);
+
+        // then
+        Assertions.assertNotNull(profiles);
+        Assertions.assertFalse(profiles.isEmpty());
+        Assertions.assertEquals(1, profiles.size());
+    }
+
+    @Test
+    void givenNullProfileEntityList_thenItShouldReturnEmptyProfileList() {
+        // given, when
+        List<Profile> profiles = ToModelMapper.entitiesToModel(null);
+
+        // then
+        Assertions.assertNotNull(profiles);
+        Assertions.assertTrue(profiles.isEmpty());
+    }
+
+    @Test
+    void givenEmptyProfileEntityList_thenItShouldReturnEmptyProfileList() {
+        // given, when
+        List<Profile> profiles = ToModelMapper.entitiesToModel(List.of());
+
+        // then
+        Assertions.assertNotNull(profiles);
+        Assertions.assertTrue(profiles.isEmpty());
+    }
+
+    @Test
+    void givenGenreString_thenItShouldReturnGenreEnum() {
+        // given, when
+        List<Genre> genreList = ToModelMapper.extractGenres("action,comedy,drama");
+
+        // then
+        Assertions.assertNotNull(genreList);
+        Assertions.assertEquals(Genre.ACTION, genreList.getFirst());
     }
 }

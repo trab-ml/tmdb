@@ -14,6 +14,4 @@ public class Profile {
     private Optional<Long> id;
     private Optional<Boolean> adult;
     private List<Genre> genreList;
-//    private String title;
-//    private LocalDate releaseDate;
 }

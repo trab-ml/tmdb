@@ -66,11 +66,13 @@ public class MoviesApiRestClientServiceImpl implements MoviesApiRestClientServic
 
     @Override
     public List<Movie> getBestMovies() {
-        return fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
+        List<Movie> movies = fetchMovies(TMBD_API_BASE_URL + TMDB_POPULAR_MOVIES_API_PATH +
                 "?api_key=" + TMBD_API_KEY +
                 "&language=" + LANGUAGE +
                 "&page=" + (randomGenerator.nextInt(BEST_MOVIES_TOTAL_PAGES) + 1)
         );
+
+        return  movies.size() > 10 ? movies.subList(0, 10) : movies;
     }
 
     @Override

@@ -32,7 +32,6 @@ public class MoviesController {
     public ResponseEntity<List<MovieResponse>> getPopularMovies() {
         return ResponseEntity.ok().body(
                 ToResponseMapper.toResponse(moviesApiRestClientService.getBestMovies())
-                        .subList(0, 10)
         );
     }
 

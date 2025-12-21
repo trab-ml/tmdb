@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr</groupId>
-	<artifactId>movieapp</artifactId>
+	<artifactId>tmdb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movieapp</name>
+	<name>tmdb</name>
 	<description>A movie app based on the movie database api (TMDB)</description>
 	<url/>
 	<licenses>
@@ -28,8 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-
 	</properties>
+
 	<dependencies>
         <dependency>
 			<groupId>org.springframework.boot</groupId>

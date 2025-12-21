@@ -12,6 +12,7 @@ npm run dev
 # Option 2
 # run all containers (bdd, backend, frontend)
 docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-recreate
+docker compose --env-file ~/IdeaProjects/tmdb/backend/.env down --volumes --rmi all --remove-orphans
 ```
 
 ### back
@@ -33,3 +34,9 @@ docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-re
 - ui
     - [flaticon](https://www.flaticon.com/fr/)
     - [servicestack](https://docs.servicestack.net/vue/)
+
+### resources
+
+- [optimized docker images](https://piotrminkowski.com/2023/11/07/slim-docker-images-for-java/)
+- [improved docker images](https://medium.com/@bolot.89/10-proven-strategies-to-optimize-your-dockerized-spring-boot-application-f9420280d6c0)
+...

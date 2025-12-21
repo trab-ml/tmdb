@@ -1,4 +1,3 @@
-node_modules
 *.iml
 .idea
 .vscode
@@ -6,5 +5,4 @@ node_modules
 .gitignore
 *.md
 .git
-*.log
-Dockerfile*
+docker-compose*

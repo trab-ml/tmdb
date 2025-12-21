@@ -8,13 +8,19 @@ services:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ./data:/app
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - backend
+    shm_size: 128mb
 
   spring-service:
     container_name: tmdb-back
-    build: ~/IdeaProjects/tmdb/backend
+    build:
+      context: ~/IdeaProjects/tmdb/backend
+      dockerfile: Dockerfile
+      cache_from:
+        - spring-service:v1.0
+    image: spring-service:v1.0
     depends_on:
       - db
     environment:
@@ -34,9 +40,14 @@ services:
       - '${BACKEND_LOCAL_PORT}:${BACKEND_DOCKER_PORT}'
     networks:
       - backend
+      - frontend
 
   vue-service:
-    build: ~/IdeaProjects/tmdb/frontend
+    build:
+      context: ~/IdeaProjects/tmdb/frontend
+      cache_from:
+        - vue-service:v1.0
+    image: vue-service:v1.0
     container_name: tmdb-front
     depends_on:
       - spring-service
@@ -50,3 +61,6 @@ networks:
     driver: bridge
   frontend:
     driver: bridge
+
+volumes:
+    postgres_data:

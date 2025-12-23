@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
+		<version>3.5.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr</groupId>
@@ -97,6 +97,22 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>12.1.9</version>
+                <configuration>
+                    <failBuildOnCVSS>4</failBuildOnCVSS>
+                    <nvdDatafeedUrl>http://internal-mirror.mycorp.com/nvdcve-{0}.json.gz</nvdDatafeedUrl>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

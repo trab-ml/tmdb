@@ -11,8 +11,12 @@ npm run dev
 
 # Option 2
 # run all containers (bdd, backend, frontend)
-docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build --force-recreate
+docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build # --force-recreate
 docker compose --env-file ~/IdeaProjects/tmdb/backend/.env down --volumes --rmi all --remove-orphans
+
+# check dependencies vulnerabilities
+mvn dependency-check:check
+mvn dependency:tree
 ```
 
 ### back
@@ -39,4 +43,5 @@ docker compose --env-file ~/IdeaProjects/tmdb/backend/.env down --volumes --rmi 
 
 - [optimized docker images](https://piotrminkowski.com/2023/11/07/slim-docker-images-for-java/)
 - [improved docker images](https://medium.com/@bolot.89/10-proven-strategies-to-optimize-your-dockerized-spring-boot-application-f9420280d6c0)
+- [mvn dependency check](https://dependency-check.github.io/DependencyCheck/dependency-check-maven/index.html)
 ...

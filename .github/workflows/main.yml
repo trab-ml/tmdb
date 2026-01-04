@@ -6,6 +6,8 @@ jobs:
   build-deploy:
     name: Build and Deploy that Spring Boot project
     runs-on: ubuntu-latest
+    env:
+      POM_FILE: ./backend/pom.xml
     steps:
       - name: Checkout to project code
         uses: actions/checkout@v3
@@ -17,9 +19,9 @@ jobs:
           distribution: 'corretto'
 
       - name: Unit tests
-        run: mvn -B test --file pom.xml
+        run: mvn -B test --file ${{env.POM_FILE}}
 
       - name: Build the application
         run: |
           mvn clean
-          mvn -B package --file pom.xml
+          mvn -B package --file ${{env.POM_FILE}}

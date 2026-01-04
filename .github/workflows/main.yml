@@ -23,5 +23,6 @@ jobs:
 
       - name: Build the application
         run: |
+          cd backend
           mvn clean
           mvn -B package --file ${{env.POM_FILE}}

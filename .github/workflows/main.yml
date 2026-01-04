@@ -7,7 +7,6 @@ jobs:
     name: Build and Deploy that Spring Boot project
     runs-on: ubuntu-latest
     env:
-      TARGET_REGISTRY: docker.io
       BACKEND_DIR: ./backend
       BACKEND_DOCKERFILE: ./backend/Dockerfile
       POM_FILE: ./backend/pom.xml

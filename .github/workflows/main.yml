@@ -1,7 +1,6 @@
 on:
   push:
-    branches:
-      - main
+    branches: ['main', 'feats/add-ci-cd-pipeline']
 
 jobs:
   build-deploy:

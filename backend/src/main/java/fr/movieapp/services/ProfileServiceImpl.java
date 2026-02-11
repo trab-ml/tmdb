@@ -3,7 +3,6 @@ package fr.movieapp.services;
 import fr.movieapp.entities.ProfileEntity;
 import fr.movieapp.exceptions.AlreadyExistsException;
 import fr.movieapp.exceptions.ProfileEntityAlreadyExistsException;
-import fr.movieapp.external.MoviesApiRestClientService;
 import fr.movieapp.mappers.ToModelMapper;
 import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;

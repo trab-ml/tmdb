@@ -62,7 +62,7 @@ class ProfilesControllerTest {
         ProfileResponse profileResponse = profilesController
                 .addProfile(ProfileRequest
                         .builder()
-                        .genreIdsList(Optional.of(List.of().toString()))
+                        .commaSeparatedGenres(Optional.of(List.of().toString()))
                         .build()).getBody();
 
         // then
@@ -76,7 +76,7 @@ class ProfilesControllerTest {
                 .builder()
                 .id(Optional.of(1L))
                 .adult(Optional.of(true))
-                .genreIdsList(Optional.of(List.of().toString()))
+                .commaSeparatedGenres(Optional.of(List.of().toString()))
                 .build();
 
         // when

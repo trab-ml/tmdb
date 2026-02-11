@@ -2,13 +2,12 @@
   <Header />
   <main id="wrapper" style="overflow: hidden;">
     <h1>{{ t('profilePage.title') }}</h1>
-
     <h2>{{ t('profilePage.formTitle') }}</h2>
     <form
         action=""
         @submit.prevent="handleSubmit"
         style="border: 1px solid; border-radius: 1rem; padding: 1rem 0.5rem">
-      <CheckboxField :label="t('profilePage.adultCheckboxLabel')" @getInputValue="(v: boolean) => toSubmit.adult = v"/>
+      <CheckboxField :label="t('profilePage.adultCheckboxLabel')" @getInputValue="(val: boolean) => toSubmit.adult = val"/>
 
       <v-app style="max-height: 6rem !important; padding: 0 !important; margin: 0 !important;" class="d-flex custom-v-app">
         <v-container style="padding: 0 !important; margin: 0 !important;">
@@ -45,32 +44,30 @@ import ProfilesService from "../../services/ProfilesService.ts"
 import TableOfProfiles from "../organisms/TableOfProfiles.vue"
 import {onMounted, ref} from "vue"
 import {useI18n} from "vue-i18n"
+import {ERequestStatus} from "../../types/global.ts"
 
 const {t} = useI18n()
 
 export type TSubmitPayload = {
   adult: boolean,
-  commaSeperatedGenres: string
+  commaSeparatedGenres: string
 }
 const toSubmit = ref<TSubmitPayload>({
   adult: false,
-  commaSeperatedGenres: ''
+  commaSeparatedGenres: ''
 })
 
 const profilesService = new ProfilesService()
 const profiles = ref<IProfile[]>([])
 const desiredGenres = ref<EMovieGenre[]>([])
 
-const handleSubmit = () => {
-  // if (!toSubmit.value) {
-  //   toSubmit.value = {
-  //     adult: false,
-  //     commaSeperatedGenres: ''
-  //   }
-  // }
-
-  toSubmit.value.commaSeperatedGenres = desiredGenres.value.join(',')
-  profilesService.addProfile(toSubmit.value)
+const handleSubmit = async () => {
+  toSubmit.value.commaSeparatedGenres = desiredGenres.value.join(',')
+  const tempAddingStatus = await profilesService.addProfile(toSubmit.value)
+  
+  if (ERequestStatus.KO === tempAddingStatus) {
+    alert(t('profilePage.alreadyExists'))
+  }
 }
 
 onMounted(async () => {

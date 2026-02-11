@@ -47,3 +47,7 @@ export const stringToWeatherType = (str: string) => {
 
     return g;
 };
+
+export enum ERequestStatus {
+    OK, KO
+}

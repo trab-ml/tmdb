@@ -25,10 +25,11 @@ export const fr = {
     profilePage: {
         title: 'Profil',
         formTitle: 'Créer un profil',
-        adultCheckboxLabel: 'Adulte (- 18 ans?)',
+        adultCheckboxLabel: 'Plus de 18 ans',
         genreSelectFieldTitled: 'Genre',
         submitButtonText: 'Envoyer',
-        noSavedGenre: 'Aucun profil sauvegardé',
+        noSavedGenre: 'Aucun profil sauvegardé.',
+        alreadyExists: 'Ce profil existe déjà.',
     },
     tableOfProfiles: {
         title: 'Profils Sauvegardés',

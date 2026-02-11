@@ -1,5 +1,6 @@
 import axios from "axios"
 import type {IProfile} from "../types/global.ts"
+import {ERequestStatus} from "../types/global.ts"
 import type {TSubmitPayload} from "../components/pages/ProfilePage.vue"
 
 export default class ProfilesService {
@@ -19,11 +20,22 @@ export default class ProfilesService {
         return profiles
     }
 
-    public async addProfile(toSubmit: TSubmitPayload){
-        return await axios.post(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_PROFILES_PATH,
+    public async addProfile(toSubmit: TSubmitPayload): Promise<ERequestStatus> {
+        let status: ERequestStatus = ERequestStatus.KO
+
+        await axios.post(import.meta.env.VITE_BACKEND_BASE_URL + import.meta.env.VITE_PROFILES_PATH,
             toSubmit,
             {
                 headers: this.CONTENT_TYPE_APPLICATION_JSON,
             })
+            .then((_response) => {
+                status = ERequestStatus.OK
+            })
+            .catch((_error) => { 
+                console.log(_error)
+                status = ERequestStatus.KO 
+            })
+        
+        return status
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header/>
   <main>
     <h1>{{ t('popularMoviesPage.title') }}</h1>
 
@@ -23,36 +23,36 @@
       </p>
     </form>
 
-    <MoviesContainer :movieList="movieList" />
+    <MoviesContainer :movieList="movieList"/>
   </main>
 </template>
 
 <script setup lang="ts">
-import Header from "../layouts/Header.vue"
-import MoviesService from "../../services/MoviesService.ts"
-import {onMounted, ref} from "vue"
-import TableOfProfiles from "../organisms/TableOfProfiles.vue"
-import ProfilesService from "../../services/ProfilesService.ts"
-import SubmitButton from "../atoms/SubmitButton.vue"
-import MoviesContainer from "../organisms/MoviesContainer.vue"
-import {useI18n} from "vue-i18n"
-import type {IMovie, IProfile} from "../../types/global.ts"
+import Header from "../layouts/Header.vue";
+import MoviesService from "../../services/MoviesService.ts";
+import {onMounted, ref} from "vue";
+import TableOfProfiles from "../organisms/TableOfProfiles.vue";
+import ProfilesService from "../../services/ProfilesService.ts";
+import SubmitButton from "../atoms/SubmitButton.vue";
+import MoviesContainer from "../organisms/MoviesContainer.vue";
+import {useI18n} from "vue-i18n";
+import type {IMovie, IProfile} from "../../types/global.ts";
 
-const {t} = useI18n()
-const movieList = ref<IMovie[]>([])
-const moviesService = new MoviesService()
-const profilesService = new ProfilesService()
-const profiles = ref<IProfile[]>([])
-const selectedProfile = ref<string>('')
+const {t} = useI18n();
+const movieList = ref<IMovie[]>([]);
+const moviesService = new MoviesService();
+const profilesService = new ProfilesService();
+const profiles = ref<IProfile[]>([]);
+const selectedProfile = ref<string>('');
 
 onMounted(async () => {
-  movieList.value = await moviesService.getMovies(true)
-  profiles.value = await profilesService.getProfiles()
-})
+  movieList.value = await moviesService.getMovies(true);
+  profiles.value = await profilesService.getProfiles();
+});
 
 const handleSubmit = async () => {
-  movieList.value = await moviesService.searchByProfile(selectedProfile.value)
-}
+  movieList.value = await moviesService.searchByProfile(selectedProfile.value);
+};
 </script>
 
 <style scoped>

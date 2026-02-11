@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 
 import BestMoviesPage from "./components/pages/BestMoviesPage.vue";
 import NotFound from "./components/molecules/NotFound.vue";

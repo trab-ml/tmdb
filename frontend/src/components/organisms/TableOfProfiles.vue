@@ -67,24 +67,24 @@
 </template>
 
 <script setup lang="ts">
-import okIcon from "/src/assets/ok-32px.png"
-import koIcon from "/src/assets/not-ok-32px.png"
-import takeALookIcon from "/src/assets/take-look-32px.png"
-import {ref} from 'vue'
-import type { IProfile } from '../../types/global.js'
-import { useI18n } from 'vue-i18n'
+import okIcon from "/src/assets/ok-32px.png";
+import koIcon from "/src/assets/not-ok-32px.png";
+import takeALookIcon from "/src/assets/take-look-32px.png";
+import {ref} from 'vue';
+import type {IProfile} from '../../types/global.js';
+import {useI18n} from 'vue-i18n';
 
 const props = defineProps<{
   items: IProfile[],
   formMode: boolean
-}>()
-const {t} = useI18n()
-const selectedProfile = ref('')
+}>();
+const {t} = useI18n();
+const selectedProfile = ref('');
 
 const emits = defineEmits(['getInputValue']);
 const onChange = () => {
   emits('getInputValue', selectedProfile.value);
-}
+};
 </script>
 
 <style scoped>

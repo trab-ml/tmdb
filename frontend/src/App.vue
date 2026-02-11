@@ -26,5 +26,5 @@ main {
 </style>
 
 <script setup lang="ts">
-import Footer from "./components/atoms/Footer.vue"
+import Footer from "./components/atoms/Footer.vue";
 </script>

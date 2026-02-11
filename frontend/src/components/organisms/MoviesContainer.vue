@@ -32,7 +32,8 @@
             variant="text"
             :ripple="false"
             style="cursor: default"
-        >{{ t('popularMoviesPage.moviesContainer.explore') }}</v-btn>
+        >{{ t('popularMoviesPage.moviesContainer.explore') }}
+        </v-btn>
 
         <v-spacer></v-spacer>
 
@@ -57,28 +58,28 @@
 </template>
 
 <script setup lang="ts">
-import atLeastEighteen from "/src/assets/-18-32px.png"
-import defaultCoverImg from "/src/assets/best-movie-slogan.png"
-import {useI18n} from "vue-i18n"
-import {ref, watch} from "vue"
-import type {IMovie} from "../../types/global.ts"
+import atLeastEighteen from "/src/assets/-18-32px.png";
+import defaultCoverImg from "/src/assets/best-movie-slogan.png";
+import {useI18n} from "vue-i18n";
+import {ref, watch} from "vue";
+import type {IMovie} from "../../types/global.ts";
 
-const props = defineProps<{ movieList: IMovie[] }>()
-const { t } = useI18n()
+const props = defineProps<{ movieList: IMovie[] }>();
+const {t} = useI18n();
 
-const normalizedMovies = ref<IMovie[]>([])
-const expandedMap = ref<Map<string, boolean>>(new Map())
+const normalizedMovies = ref<IMovie[]>([]);
+const expandedMap = ref<Map<string, boolean>>(new Map());
 
 function isExpanded(movie: IMovie): boolean {
-  return !!expandedMap.value.get(movie._uniqueId!) || false
+  return !!expandedMap.value.get(movie._uniqueId!) || false;
 }
 
 function toggleExpand(movie: IMovie): void {
-  const id = movie._uniqueId!
-  const currentState = expandedMap.value.get(id) || false
+  const id = movie._uniqueId!;
+  const currentState = expandedMap.value.get(id) || false;
 
-  expandedMap.value.clear()
-  expandedMap.value.set(id, !currentState)
+  expandedMap.value.clear();
+  expandedMap.value.set(id, !currentState);
 }
 
 watch(() => props.movieList, (newList) => {
@@ -86,9 +87,9 @@ watch(() => props.movieList, (newList) => {
     normalizedMovies.value = newList.map((movie) => ({
       ...movie,
       _uniqueId: crypto.randomUUID()
-    }))
+    }));
   }
-})
+});
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header/>
   <main id="wrapper" style="overflow: hidden;">
     <h1>{{ t('profilePage.title') }}</h1>
     <h2>{{ t('profilePage.formTitle') }}</h2>
@@ -7,9 +7,11 @@
         action=""
         @submit.prevent="handleSubmit"
         style="border: 1px solid; border-radius: 1rem; padding: 1rem 0.5rem">
-      <CheckboxField :label="t('profilePage.adultCheckboxLabel')" @getInputValue="(val: boolean) => toSubmit.adult = val"/>
+      <CheckboxField :label="t('profilePage.adultCheckboxLabel')"
+                     @getInputValue="(val: boolean) => toSubmit.adult = val"/>
 
-      <v-app style="max-height: 6rem !important; padding: 0 !important; margin: 0 !important;" class="d-flex custom-v-app">
+      <v-app style="max-height: 6rem !important; padding: 0 !important; margin: 0 !important;"
+             class="d-flex custom-v-app">
         <v-container style="padding: 0 !important; margin: 0 !important;">
           <v-select
               clearable
@@ -30,23 +32,23 @@
       <SubmitButton class="mt-3" :value="t('profilePage.submitButtonText')"/>
     </form>
 
-    <TableOfProfiles v-if="profiles.length > 0" :items="profiles" :formMode="false" />
-    <p v-else>{{t('profilePage.noSavedGenre')}}</p>
+    <TableOfProfiles v-if="profiles.length > 0" :items="profiles" :formMode="false"/>
+    <p v-else>{{ t('profilePage.noSavedGenre') }}</p>
   </main>
 </template>
 
 <script setup lang="ts">
-import Header from "../layouts/Header.vue"
-import CheckboxField from "../atoms/CheckboxField.vue"
-import {EMovieGenre, type IProfile} from "../../types/global.ts"
-import SubmitButton from "../atoms/SubmitButton.vue"
-import ProfilesService from "../../services/ProfilesService.ts"
-import TableOfProfiles from "../organisms/TableOfProfiles.vue"
-import {onMounted, ref} from "vue"
-import {useI18n} from "vue-i18n"
-import {ERequestStatus} from "../../types/global.ts"
+import Header from "../layouts/Header.vue";
+import CheckboxField from "../atoms/CheckboxField.vue";
+import {EMovieGenre, type IProfile} from "../../types/global.ts";
+import SubmitButton from "../atoms/SubmitButton.vue";
+import ProfilesService from "../../services/ProfilesService.ts";
+import TableOfProfiles from "../organisms/TableOfProfiles.vue";
+import {onMounted, ref} from "vue";
+import {useI18n} from "vue-i18n";
+import {ERequestStatus} from "../../types/global.ts";
 
-const {t} = useI18n()
+const {t} = useI18n();
 
 export type TSubmitPayload = {
   adult: boolean,
@@ -55,24 +57,24 @@ export type TSubmitPayload = {
 const toSubmit = ref<TSubmitPayload>({
   adult: false,
   commaSeparatedGenres: ''
-})
+});
 
-const profilesService = new ProfilesService()
-const profiles = ref<IProfile[]>([])
-const desiredGenres = ref<EMovieGenre[]>([])
+const profilesService = new ProfilesService();
+const profiles = ref<IProfile[]>([]);
+const desiredGenres = ref<EMovieGenre[]>([]);
 
 const handleSubmit = async () => {
-  toSubmit.value.commaSeparatedGenres = desiredGenres.value.join(',')
-  const tempAddingStatus = await profilesService.addProfile(toSubmit.value)
-  
+  toSubmit.value.commaSeparatedGenres = desiredGenres.value.join(',');
+  const tempAddingStatus = await profilesService.addProfile(toSubmit.value);
+
   if (ERequestStatus.KO === tempAddingStatus) {
-    alert(t('profilePage.alreadyExists'))
+    alert(t('profilePage.alreadyExists'));
   }
-}
+};
 
 onMounted(async () => {
-  profiles.value = await profilesService.getProfiles()
-})
+  profiles.value = await profilesService.getProfiles();
+});
 </script>
 
 <style scoped>

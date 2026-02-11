@@ -4,7 +4,7 @@
       <v-app-bar-title>
         <RouterLink to="/">
           <div class="tooltip">
-            {{t('header.logoText')}} <span class="tooltiptext"> {{t('header.logoTooltipText')}} </span>
+            {{ t('header.logoText') }} <span class="tooltiptext"> {{ t('header.logoTooltipText') }} </span>
           </div>
         </RouterLink>
       </v-app-bar-title>
@@ -23,9 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "vue-i18n"
+import {useI18n} from "vue-i18n";
 
-const {t} = useI18n()
+const {t} = useI18n();
 </script>
 
 <style scoped>

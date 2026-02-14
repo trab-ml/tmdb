@@ -12,6 +12,7 @@ export const fr = {
     title: "Meilleurs Films",
     submitButtonText: "Rechercher",
     noMovieFound: "Aucun film trouvé pour ce profil.",
+    resetButtonText: "Reset",
     emptyProfileList: {
       preLink: "Liste de profil vide! Veuillez",
       link: "créer",

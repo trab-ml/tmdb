@@ -9,6 +9,7 @@
 <style>
 :root {
     --main-color: #46059f;
+    --classic-red: #ff0000;
     box-sizing: border-box;
 }
 

@@ -101,7 +101,7 @@ const props = defineProps<{
     formMode: boolean;
 }>();
 const { t } = useI18n();
-const selectedProfile = ref("");
+const selectedProfile = defineModel<string>();
 
 const emits = defineEmits(["getInputValue"]);
 const onChange = () => {

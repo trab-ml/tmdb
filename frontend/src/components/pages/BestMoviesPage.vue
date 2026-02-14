@@ -37,8 +37,13 @@
                         style="margin: 0 auto"
                         :disabled="selectedProfile === ''"
                     />
-                    <button v-if="selectedProfile !== ''" variant="outlined" @click="resetProfile()" class="reset-filter">
-                        {{t('popularMoviesPage.resetButtonText')}}
+                    <button
+                        v-if="selectedProfile !== ''"
+                        variant="outlined"
+                        @click="resetProfile()"
+                        class="reset-filter"
+                    >
+                        {{ t("popularMoviesPage.resetButtonText") }}
                         <img
                             :src="koIcon"
                             :alt="t('popularMoviesPage.resetButtonText')"
@@ -69,6 +74,7 @@ import SubmitButton from "../atoms/SubmitButton.vue";
 import MoviesContainer from "../organisms/MoviesContainer.vue";
 import { useI18n } from "vue-i18n";
 import type { IMovie, IProfile } from "../../types/global.ts";
+import { TPerformanceNavigation } from "../../types/global.ts";
 import koIcon from "/src/assets/not-ok-32px.png";
 
 const { t } = useI18n();
@@ -88,7 +94,16 @@ const resetProfile = async () => {
     await fetchMoviesAndProfiles();
 };
 
-onMounted(async () => await fetchMoviesAndProfiles());
+onMounted(async () => {
+    await fetchMoviesAndProfiles();
+    const navigationEntry: TPerformanceNavigation =
+        performance.getEntriesByType("navigation")[0];
+    if (navigationEntry.type == "navigate") {
+        setTimeout(() => {
+            alert(t("popularMoviesPage.firstLoadAlertMessage"));
+        }, 300);
+    }
+});
 
 const handleSubmit = async () => {
     movieList.value = await moviesService.searchByProfile(
@@ -98,7 +113,8 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.search-button, .reset-filter {
+.search-button,
+.reset-filter {
     cursor: pointer;
     display: flex;
     justify-self: center !important;
@@ -121,7 +137,7 @@ const handleSubmit = async () => {
     .form-container {
         align-items: center;
     }
-    
+
     .form-container #form-actions {
         flex-direction: column !important;
         gap: 1rem;

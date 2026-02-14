@@ -13,6 +13,7 @@ export const fr = {
     submitButtonText: "Rechercher",
     noMovieFound: "Aucun film trouvé pour ce profil.",
     resetButtonText: "Reset",
+    firstLoadAlertMessage: "Rafraîchir pour voir plus :)",
     emptyProfileList: {
       preLink: "Liste de profil vide! Veuillez",
       link: "créer",

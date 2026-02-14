@@ -46,7 +46,7 @@
             </v-app>
 
             <SubmitButton
-                class="mt-3"
+                class="mt-3 submit-button"
                 :value="t('profilePage.submitButtonText')"
             />
         </form>
@@ -147,6 +147,21 @@ form {
     font-size: x-large;
     background: none;
     border: 0.05rem solid;
+}
+
+.submit-button {
+    cursor: pointer;
+    display: flex;
+    justify-self: center !important;
+    align-items: center;
+    margin: 2rem 0;
+    border: 1px solid;
+    border-radius: 1rem;
+    text-transform: uppercase;
+}
+
+.submit-button:hover {
+    filter: drop-shadow(0 0 0.75rem var(--main-color));
 }
 </style>
 

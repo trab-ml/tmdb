@@ -18,7 +18,6 @@
                     v-model="selectedProfile"
                     :items="profiles"
                     :formMode="true"
-                    @getInputValue="(v) => (selectedProfile = v)"
                     style="width: 75%"
                 />
                 <div

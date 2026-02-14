@@ -1,11 +1,11 @@
 <template>
-    <v-btn
+    <button
         class="d-flex mx-auto bg-grey-lighten-2 sexier"
         type="submit"
         aria-disabled="true"
     >
         {{ props.value }}
-    </v-btn>
+    </button>
 </template>
 
 <script setup lang="ts">
@@ -15,23 +15,20 @@ const props = defineProps({
 </script>
 
 <style>
-.v-btn.sexier {
+.sexier {
     background: none !important;
     color: inherit !important;
     cursor: pointer;
+    padding: 0.65rem;
 }
 
-.v-btn.sexier:hover,
-.v-btn.sexier:active {
+.sexier:hover,
+.sexier:active {
     color: #f2f2f2 !important;
     background-color: #000 !important;
 }
 
-.v-btn.sexier .v-btn__overlay {
-    opacity: 0 !important;
-}
-
-.v-btn:disabled {
+.sexier:disabled {
     cursor: not-allowed !important;
     color: grey !important;
     border-color: grey !important;

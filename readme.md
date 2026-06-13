@@ -1,6 +1,6 @@
 # 🎬 Tourcoing Movie Database
 
-Application web permettant de consulter et explorer les données de films via l'API TMDB.
+Web application allowing you to view and explore movie data via the TMDB API.
 
 ## Tech Stack
 

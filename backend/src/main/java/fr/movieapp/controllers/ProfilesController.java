@@ -16,7 +16,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/profiles")
-@CrossOrigin(origins = "${app.cors.allowed-origins}")
 public class ProfilesController {
     private final ProfileService profileService;
 

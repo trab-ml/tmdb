@@ -13,7 +13,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/movies")
-@CrossOrigin(origins = "${app.cors.allowed-origins}")
 public class MoviesController {
     private final MoviesApiRestClientService moviesApiRestClientService;
 

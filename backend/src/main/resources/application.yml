@@ -1,9 +1,8 @@
 spring:
   application:
     name: movie-app
-  
-  cors:
-    allowed-origins: ${FRONT_URL}
+    cors:
+      allowed-origins: ${FRONT_URL}
 
   jackson:
     deserialization:
@@ -16,9 +15,6 @@ spring:
       - classpath:database.yml
       - classpath:movie-api.yml
       - optional:file:./.env[.properties]
-
-frontend:
-  url: ${FRONT_URL}
 
 server:
   port: ${PORT:8080}

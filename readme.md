@@ -1,47 +1,113 @@
-# Tourcoing Movie Data Base
+# 🎬 Tourcoing Movie Database
+
+Application web permettant de consulter et explorer les données de films via l'API TMDB.
+
+## Tech Stack
+
+| Backend     | Frontend         | Database   |
+| ----------- | ---------------- | ---------- |
+| Spring Boot | Vue.js + Vuetify | PostgreSQL |
+
+---
+
+## Getting Started
+
+### Option 1 — Local Development
+
+#### 1. Start PostgreSQL
 
 ```bash
-# Option 1
-# a. run postgresql container (then activate the datasource)
-docker run -it -d -p 5432:5432 --name tmdb-bdd -e POSTGRES_PASSWORD=some_password postgres:17-alpine
-# b. then run backend (with maven or IntelliJ)
+docker run -d \
+  --name tmdb-db \
+  -p 5432:5432 \
+  -e POSTGRES_PASSWORD=some_password \
+  postgres:17-alpine
+```
+
+#### 2. Start Backend
+
+```bash
 mvn spring-boot:run
-# c. and frontend
+```
+
+#### 3. Start Frontend
+
+```bash
+npm install
 npm run dev
+```
 
-# Option 2
-# run all containers (bdd, backend, frontend)
-docker compose --env-file ~/IdeaProjects/tmdb/backend/.env up --build # --force-recreate
-docker compose --env-file ~/IdeaProjects/tmdb/backend/.env down --volumes --rmi all --remove-orphans
+---
 
-# check dependencies vulnerabilities
+### Option 2 — Docker Compose
+
+Start the full stack (database, backend, frontend):
+
+```bash
+docker compose \
+  --env-file ~/IdeaProjects/tmdb/backend/.env \
+  up --build
+```
+
+Stop and clean containers:
+
+```bash
+docker compose \
+  --env-file ~/IdeaProjects/tmdb/backend/.env \
+  down --volumes --rmi all --remove-orphans
+```
+
+---
+
+## Security & Dependencies
+
+Check dependency vulnerabilities:
+
+```bash
 mvn dependency-check:check
+```
+
+Inspect dependency tree:
+
+```bash
 mvn dependency:tree
 ```
 
-### back
+---
 
-- [TMDB](https://developer.themoviedb.org/docs/getting-started)
-    - [rated movies](https://developer.themoviedb.org/reference/guest-session-rated-movies)
-    - [get a movie img](https://developer.themoviedb.org/reference/movie-images)
-    - [image basics](https://developer.themoviedb.org/docs/image-basics)
-    - [movies genre](https://developer.themoviedb.org/reference/genre-movie-list)
-    - [popular movies](https://developer.themoviedb.org/reference/movie-popular-list)
-- [about cors](https://medium.com/@sallu-salman/cross-origin-resource-sharing-cors-in-spring-boot-applications-116163a88adc)
+### Backend
 
-### front
+#### TMDB API
 
-- [vue](https://vuejs.org/)
-- [vuetify](https://vuetifyjs.com/en/)
-- [material design icons](https://pictogrammers.com/library/mdi/)
-    - <https://vuetifyjs.com/en/features/icon-fonts/#mdi-icon-search>
-- ui
-    - [flaticon](https://www.flaticon.com/fr/)
-    - [servicestack](https://docs.servicestack.net/vue/)
+* [Getting Started](https://developer.themoviedb.org/docs/getting-started)
+* [Popular Movies](https://developer.themoviedb.org/reference/movie-popular-list)
+* [Movie Genres](https://developer.themoviedb.org/reference/genre-movie-list)
+* [Movie Images](https://developer.themoviedb.org/reference/movie-images)
+* [Image Basics](https://developer.themoviedb.org/docs/image-basics)
+* [Rated Movies](https://developer.themoviedb.org/reference/guest-session-rated-movies)
 
-### resources
+#### Spring
 
-- [optimized docker images](https://piotrminkowski.com/2023/11/07/slim-docker-images-for-java/)
-- [improved docker images](https://medium.com/@bolot.89/10-proven-strategies-to-optimize-your-dockerized-spring-boot-application-f9420280d6c0)
-- [mvn dependency check](https://dependency-check.github.io/DependencyCheck/dependency-check-maven/index.html)
-...
+* [CORS](https://medium.com/@sallu-salman/cross-origin-resource-sharing-cors-in-spring-boot-applications-116163a88adc)
+
+### Frontend
+
+* [Vue.js](https://vuejs.org/)
+* [Vuetify](https://vuetifyjs.com/)
+* Material Design Icons
+  * [Pictogrammers](https://pictogrammers.com/library/mdi/)
+  * [VuetifyJS](https://vuetifyjs.com/en/features/icon-fonts/#mdi-icon-search)
+
+#### UI Inspiration
+
+* [Flaticon](https://www.flaticon.com/)
+* [Service Stack Documentation](https://docs.servicestack.net/vue/)
+
+### DevOps & Docker
+
+* [Slim Docker Images for Java](https://piotrminkowski.com/2023/11/07/slim-docker-images-for-java/)
+* [Dockerized Spring Boot Optimization](https://medium.com/@bolot.89/10-proven-strategies-to-optimize-your-dockerized-spring-boot-application-f9420280d6c0)
+
+### Security
+
+* [OWASP Dependency Check](https://dependency-check.github.io/DependencyCheck/dependency-check-maven/index.html)

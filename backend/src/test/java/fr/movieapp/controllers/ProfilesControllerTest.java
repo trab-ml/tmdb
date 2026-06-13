@@ -2,15 +2,11 @@ package fr.movieapp.controllers;
 
 import fr.movieapp.controllers.requests.ProfileRequest;
 import fr.movieapp.controllers.responses.ProfileResponse;
-import fr.movieapp.entities.ProfileEntity;
 import fr.movieapp.exceptions.AlreadyExistsException;
 import fr.movieapp.exceptions.ProfileEntityAlreadyExistsException;
-import fr.movieapp.mappers.ToModelMapper;
-import fr.movieapp.models.Genre;
 import fr.movieapp.models.Profile;
 import fr.movieapp.repositories.ProfileRepository;
 import fr.movieapp.services.ProfileService;
-import fr.movieapp.services.ProfileServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 

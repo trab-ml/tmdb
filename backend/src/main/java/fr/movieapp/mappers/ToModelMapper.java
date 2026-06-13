@@ -86,7 +86,7 @@ public class ToModelMapper {
         return new Profile(
                 req.id(),
                 req.adult(),
-                req.genreIdsList().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.genreIdsList().get())
+                req.commaSeparatedGenres().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.commaSeparatedGenres().get())
         );
     }
 }

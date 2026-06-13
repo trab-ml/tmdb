@@ -1,30 +1,31 @@
 <template>
-  <v-app id="custom-v-app">
-    <RouterView/>
-  </v-app>
+    <v-app id="custom-v-app">
+        <RouterView />
+    </v-app>
 
-  <Footer/>
+    <Footer />
 </template>
 
 <style>
 :root {
-  --main-color: #46059f;
-  box-sizing: border-box;
+    --main-color: #46059f;
+    --classic-red: #ff0000;
+    box-sizing: border-box;
 }
 
 #custom-v-app {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 0;
-  margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin: 1rem;
 }
 </style>
 
 <script setup lang="ts">
-import Footer from "./components/atoms/Footer.vue"
+import Footer from "./components/atoms/Footer.vue";
 </script>

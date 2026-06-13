@@ -9,4 +9,4 @@ import java.util.Optional;
 public record ProfileRequest(
         @RequestMapping Optional<Long> id,
         @RequestMapping Optional<Boolean> adult,
-        @RequestMapping Optional<String> genreIdsList) {}
+        @RequestMapping Optional<String> commaSeparatedGenres) {}

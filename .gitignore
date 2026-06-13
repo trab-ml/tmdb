@@ -10,3 +10,6 @@
 /dataSources.local.xml
 .vscode
 .idea
+
+frontend/.env
+backend/.env

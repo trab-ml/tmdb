@@ -111,3 +111,14 @@ mvn dependency:tree
 ### Security
 
 * [OWASP Dependency Check](https://dependency-check.github.io/DependencyCheck/dependency-check-maven/index.html)
+
+### Deployment
+
+* [Neon](https://neon.com/)
+* [Fly](https://fly.io/)
+* [Vercel](https://vercel.com/)
+
+```bash
+sudo chmod +x setenv.sh
+./setenv.sh
+```

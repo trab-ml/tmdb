@@ -1,6 +1,10 @@
 spring:
   application:
     name: movie-app
+  
+  cors:
+    allowed-origins: ${FRONT_URL}
+
   jackson:
     deserialization:
       fail-on-unknown-properties: false

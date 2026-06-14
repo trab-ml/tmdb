@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import jakarta.annotation.PostConstruct;
+
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
@@ -14,9 +16,14 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(allowedOrigins)
-                .allowedMethods("GET", "POST")
+                .allowedOrigins(allowedOrigins.split(","))
+                .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
+    }
+
+    @PostConstruct
+    public void logCors() {
+        System.out.println("CORS allowed origins resolved to: [" + allowedOrigins + "]");
     }
 }

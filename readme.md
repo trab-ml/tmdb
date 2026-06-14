@@ -90,6 +90,10 @@ mvn dependency:tree
 
 * [CORS](https://medium.com/@sallu-salman/cross-origin-resource-sharing-cors-in-spring-boot-applications-116163a88adc)
 
+```bash
+curl -i http://localhost:8080/debug/cors
+```
+
 ### Frontend
 
 * [Vue.js](https://vuejs.org/)

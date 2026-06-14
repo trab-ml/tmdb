@@ -125,4 +125,6 @@ curl -i http://localhost:8080/debug/cors
 ```bash
 sudo chmod +x setenv.sh
 ./setenv.sh
+mvn clean package # since docker is not being use to build the code
+fly deploy
 ```

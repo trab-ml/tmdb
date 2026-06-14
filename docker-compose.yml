@@ -37,7 +37,7 @@ services:
       - SORT_BY=${SORT_BY}
       - BEST_MOVIES_TOTAL_PAGES=${BEST_MOVIES_TOTAL_PAGES}
     ports:
-      - '${BACKEND_LOCAL_PORT}:${BACKEND_DOCKER_PORT}'
+      - '${BACKEND_PORT}:${BACKEND_DOCKER_PORT}'
     networks:
       - backend
       - frontend

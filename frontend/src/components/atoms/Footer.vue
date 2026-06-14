@@ -1,10 +1,10 @@
 <template>
     <footer>
         <a
-            :href="t('footer.github.link')"
+            :href="t('footer.portfolio.link')"
             target="_blank"
             style="color: #fff"
-            >{{ t("footer.github.title") }}</a
+            >{{ t("footer.portfolio.title") }}</a
         >
     </footer>
 </template>

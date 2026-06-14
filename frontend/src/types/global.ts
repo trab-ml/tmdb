@@ -41,5 +41,3 @@ export enum ERequestStatus {
   OK,
   KO,
 }
-
-export type TPerformanceNavigation = "navigate" | "reload" | "back_forward" | "prerender" | "error";

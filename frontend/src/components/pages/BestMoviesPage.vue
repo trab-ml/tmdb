@@ -73,7 +73,6 @@ import SubmitButton from "../atoms/SubmitButton.vue";
 import MoviesContainer from "../organisms/MoviesContainer.vue";
 import { useI18n } from "vue-i18n";
 import type { IMovie, IProfile } from "../../types/global.ts";
-import { TPerformanceNavigation } from "../../types/global.ts";
 import koIcon from "/src/assets/not-ok-32px.png";
 
 const { t } = useI18n();
@@ -95,9 +94,10 @@ const resetProfile = async () => {
 
 onMounted(async () => {
     await fetchMoviesAndProfiles();
-    const navigationEntry: TPerformanceNavigation =
-        performance.getEntriesByType("navigation")[0];
-    if (navigationEntry.type == "navigate") {
+    const navigationEntry = performance.getEntriesByType(
+        "navigation",
+    )[0] as PerformanceEntry;
+    if (navigationEntry.toString() == "navigate") {
         setTimeout(() => {
             alert(t("popularMoviesPage.firstLoadAlertMessage"));
         }, 300);

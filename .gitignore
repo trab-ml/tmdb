@@ -11,6 +11,5 @@
 .vscode
 .idea
 
-frontend/.env
-backend/.env
+frontend/.env.prod
 backend/.env.prod

@@ -1,14 +1,12 @@
-spring:
-  application:
+application:
     name: movie-app
     cors:
       allowed-origins: ${FRONT_URL}
 
+spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: false
-#    serialization:
-#      fail-on-empty-beans: false
 
   config:
     import:
@@ -17,5 +15,5 @@ spring:
       - optional:file:./.env[.properties]
 
 server:
-  port: ${PORT:8080}
-  address: 0.0.0.0
+  port: ${BACKEND_PORT:8080}
+  address: ${BACKEND_ADRESS:127.0.0.1}

@@ -51,9 +51,9 @@ export const fr = {
     title: "Les mieux notés",
   },
   footer: {
-    github: {
-      title: "Github",
-      link: "https://github.com/trab-ml",
+    portfolio: {
+      title: "Portfolio",
+      link: "https://trab-ml.github.io/portfolio/",
     },
   },
   notFoundPage: {

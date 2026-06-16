@@ -60,7 +60,7 @@
         </form>
 
         <MoviesContainer :movieList="movieList" v-if="movieList.length > 0" />
-        <LoadingSpinner />
+        <LoadingSpinner v-else />
     </main>
 </template>
 

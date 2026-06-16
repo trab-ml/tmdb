@@ -27,7 +27,7 @@ const vuetify = createVuetify({
     },
 });
 
-export const createApp = ViteSSG(App, { routes }, ({ app }) => {
+export const createApp = ViteSSG(App, { routes: routes }, ({ app }) => {
     app.use(i18n);
-    app.use(vuetify).mount("#app");
+    app.use(vuetify);
 });

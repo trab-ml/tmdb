@@ -1,27 +1,22 @@
-import BestMoviesPage from "./components/pages/BestMoviesPage.vue";
-import NotFound from "./components/molecules/NotFound.vue";
-import ProfilePage from "./components/pages/ProfilePage.vue";
-import TopRatedMoviesPage from "./components/pages/TopRatedMoviesPage.vue";
-
 export const routes = [
   {
     path: "/",
     name: "bestMoviesPage",
-    component: BestMoviesPage,
+    component: () => import("./components/pages/BestMoviesPage.vue"),
   },
   {
     path: "/top-rated",
     name: "topRatedMoviesPage",
-    component: TopRatedMoviesPage,
+    component: () => import("./components/pages/TopRatedMoviesPage.vue"),
   },
   {
     path: "/profile",
     name: "profilePage",
-    component: ProfilePage,
+    component: () => import("./components/pages/ProfilePage.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
-    component: NotFound,
+    component: () => import("./components/molecules/NotFound.vue"),
   },
 ];

@@ -56,7 +56,7 @@ a:hover {
 }
 </style>
 
-<script lang="ts">
+<script setup lang="ts">
 import { usePageHead } from "../atoms/usePageHead.ts";
 
 usePageHead("notFoundPage.metaTitle", "notFoundPage.metaDescription");

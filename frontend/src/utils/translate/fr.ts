@@ -9,6 +9,8 @@ export const fr = {
     },
   },
   popularMoviesPage: {
+    metaTitle: "Meilleurs Films '{|}' Tourcoing Movie Data Base",
+    metaDescription: "Meilleurs Films notés en provenance de The Movie Database API",
     title: "Meilleurs Films",
     submitButtonText: "Rechercher",
     noMovieFound: "Aucun film trouvé pour ce profil.",
@@ -25,6 +27,8 @@ export const fr = {
     },
   },
   profilePage: {
+    metaTitle: "Profils '{|}' Tourcoing Movie Data Base",
+    metaDescription: "Ensemble de filtres pour mieux sélectionner en provenance de The Movie Database API",
     title: "Profil",
     formTitle: "Créer un profil",
     adultCheckboxLabel: "Plus de 18 ans",
@@ -48,15 +52,19 @@ export const fr = {
     },
   },
   topRatedPage: {
+    metaTitle: "Films les mieux notés '{|}' Tourcoing Movie Data Base",
+    metaDescription: "Films les mieux notés en provenance de The Movie Database API",
     title: "Les mieux notés",
   },
   footer: {
     portfolio: {
       title: "Portfolio",
-      link: "https://trab-ml.github.io/portfolio/",
+      link: "https://trab'{|}'ml.github.io/portfolio/",
     },
   },
   notFoundPage: {
+    metaTitle: "Page non trouvée '{|}' Tourcoing Movie Data Base",
+    metaDescription: "Page non trouvée '{|}' Tourcoing Movie Data Base",
     info: "Oups! page non trouvée!",
     callToAction: "Retourner à l'accueil",
   },

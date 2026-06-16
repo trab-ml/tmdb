@@ -10,7 +10,11 @@ import fr.movieapp.models.Profile;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Arrays;
 
 @Slf4j
 public class ToModelMapper {
@@ -29,9 +33,7 @@ public class ToModelMapper {
                 dto.coverImgUrl(),
                 LocalDate.parse(dto.releaseDate() != null
                         ? dto.releaseDate()
-                        : "1900-01-01"
-                )
-        );
+                        : "1900-01-01"));
     }
 
     public static List<Movie> toModel(MovieApiResponseDto response) {
@@ -86,7 +88,7 @@ public class ToModelMapper {
         return new Profile(
                 req.id(),
                 req.adult(),
-                req.commaSeparatedGenres().isEmpty() ? List.of() : ToModelMapper.extractGenres(req.commaSeparatedGenres().get())
-        );
+                req.commaSeparatedGenres().isEmpty() ? List.of()
+                        : ToModelMapper.extractGenres(req.commaSeparatedGenres().get()));
     }
 }

@@ -55,3 +55,9 @@ a:hover {
     background-color: #e6482e;
 }
 </style>
+
+<script setup lang="ts">
+import { usePageHead } from "../atoms/usePageHead.ts";
+
+usePageHead("notFoundPage.metaTitle", "notFoundPage.metaDescription");
+</script>

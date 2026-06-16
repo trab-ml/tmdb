@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tmdb-opal-omega.vercel.app/sitemap.xml

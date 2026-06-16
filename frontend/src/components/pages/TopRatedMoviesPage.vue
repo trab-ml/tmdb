@@ -13,8 +13,12 @@ import {onMounted, ref} from "vue";
 import MoviesContainer from "../organisms/MoviesContainer.vue";
 import {useI18n} from "vue-i18n";
 import type {IMovie} from "../../types/global.ts";
+import { usePageHead } from "../atoms/usePageHead.ts";
 
 const {t} = useI18n();
+
+usePageHead("topRatedPage.metaTitle", "topRatedPage.metaDescription");
+
 let movieList = ref<IMovie[]>([]);
 const moviesService = new MoviesService();
 

@@ -6,16 +6,166 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
-            content="Application web permettant de voir et explorer des films fantastiques recuperées via l'API The Movie Database. Web application allowing you to view and explore movie data via the TMDB API. trab-ml.github.io/portfolio"
+            content="Application web permettant de voir et explorer des films fantastiques recuperées via l'API Movie Database. trab-ml.github.io/portfolio"
         />
+        <meta name="robots" content="index,follow" />
+        <meta name="googlebot" content="index,follow" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.country" content="France" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+        <link rel="canonical" href="https://tmdb-opal-omega.vercel.app/" />
+        <link rel="author" href="https://tmdb-opal-omega.vercel.app/" />
+
         <title>
             Obtenir un aperçu des films fantastiques |
             trab-ml.github.io/portfolio
         </title>
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:url" content="https://tmdb-opal-omega.vercel.app/" />
+        <meta property="og:site_name" content="github.com/trab-ml" />
+        <meta
+            property="article:publisher"
+            content="https://www.linkedin.com/company/the--architect"
+        />
+        <meta
+            property="article:modified_time"
+            content="2026-06-04T23:00:00+00:00"
+        />
+        <meta
+            property="og:title"
+            content="Développeur Web Full Stack Freelance - Création de Sites &
+            Applications Web"
+        />
+        <meta
+            property="og:description"
+            content="Développeur Web Full-Stack Freelance, je suis spécialisé dans les sites sur mesure, portfolios et landing pages pour améliorer votre visibilité et attirer de nouveaux clients. Contactez-moi sur architect.fr"
+        />
+        <meta
+            property="og:image"
+            content="https://tmdb-opal-omega.vercel.app/software-engineer.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="600" />
+        <meta property="og:image:type" content="image/png" />
+        <meta
+            property="og:image:alt"
+            content="github.com/trab-ml — Développeur Web Full-Stack Freelance"
+        />
+
+        <!-- Twitter / X Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Développeur Web Full-Stack Freelance"
+        />
+        <meta
+            name="twitter:description"
+            content="Développeur Web Full-Stack Freelance, je suis spécialisé dans les sites sur mesure, portfolios et landing pages pour améliorer votre visibilité et attirer de nouveaux clients. Contactez-moi sur trab-ml.github.io/portfolio"
+        />
+        <meta
+            name="twitter:image"
+            content="https://tmdb-opal-omega.vercel.app/software-engineer.png"
+        />
+
+        <!-- Structured data -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "ProfessionalService",
+                        "@id": "https://tmdb-opal-omega.vercel.app/#business",
+                        "name": "github.com/trab-ml",
+                        "url": "https://tmdb-opal-omega.vercel.app/",
+                        "image": "https://tmdb-opal-omega.vercel.app/tea-og.jpg",
+                        "description": "Développeur web full-stack freelance spécialisé dans la création de sites web performants et optimisés SEO.",
+                        "founder": {
+                            "@type": "Person",
+                            "name": "github.com/trab-ml"
+                        },
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "10 Pl. Victor Hassebroucq",
+                            "addressLocality": "Tourcoing",
+                            "addressRegion": "Nord",
+                            "postalCode": "59200",
+                            "addressCountry": "FR"
+                        },
+                        "contactPoint": {
+                            "@type": "ContactPoint",
+                            "contactType": "customer service",
+                            "email": "",
+                            "availableLanguage": ["fr", "en"]
+                        },
+                        "areaServed": {
+                            "@type": "Country",
+                            "name": "France"
+                        },
+                        "serviceType": "Développement web",
+                        "sameAs": [
+                            "https://www.linkedin.com/company/the--architect"
+                        ]
+                    },
+                    {
+                        "@type": "Service",
+                        "@id": "https://tmdb-opal-omega.vercel.app/#service",
+                        "serviceType": "Website & Web app development",
+                        "provider": {
+                            "@id": "https://tmdb-opal-omega.vercel.app/#business"
+                        },
+                        "areaServed": {
+                            "@type": "Country",
+                            "name": "France"
+                        },
+                        "hasOfferCatalog": {
+                            "@type": "OfferCatalog",
+                            "name": "Development projects",
+                            "itemListElement": [
+                                {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                        "@type": "Service",
+                                        "name": "Landing page"
+                                    }
+                                },
+                                {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                        "@type": "Service",
+                                        "name": "Showcase website"
+                                    }
+                                },
+                                {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                        "@type": "Service",
+                                        "name": "Web application"
+                                    }
+                                },
+                                {
+                                    "@type": "Offer",
+                                    "itemOffered": {
+                                        "@type": "Service",
+                                        "name": "Deployment & DevOps"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                ]
+            }
+        </script>
     </head>
     <body>
         <div id="app"></div>
-        <noscript>Le JavaScript est nécessaire pour accéder à ce site.</noscript>
+        <noscript
+            >Le JavaScript est nécessaire pour accéder à ce site.</noscript
+        >
         <script type="module" src="/src/main.ts"></script>
         <link rel="stylesheet" href="./src/styles.css" />
     </body>

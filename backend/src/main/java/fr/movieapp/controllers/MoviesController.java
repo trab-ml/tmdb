@@ -6,7 +6,10 @@ import fr.movieapp.external.MoviesApiRestClientService;
 import fr.movieapp.mappers.ToResponseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,19 +26,18 @@ public class MoviesController {
     @GetMapping("/top-rated")
     public ResponseEntity<List<MovieResponse>> getMovies() {
         return ResponseEntity.ok().body(
-                ToResponseMapper.toResponse(moviesApiRestClientService.getTopRatedMovies())
-        );
+                ToResponseMapper.toResponse(moviesApiRestClientService.getTopRatedMovies()));
     }
 
     @GetMapping("/best-movies")
     public ResponseEntity<List<MovieResponse>> getPopularMovies() {
         return ResponseEntity.ok().body(
-                ToResponseMapper.toResponse(moviesApiRestClientService.getBestMovies())
-        );
+                ToResponseMapper.toResponse(moviesApiRestClientService.getBestMovies()));
     }
 
     @GetMapping("/best-movies-by-profile")
-    public ResponseEntity<List<MovieResponse>> searchByProfile(@RequestParam String id) throws ProfileEntityNotFoundException {
+    public ResponseEntity<List<MovieResponse>> searchByProfile(@RequestParam String id)
+            throws ProfileEntityNotFoundException {
         return ResponseEntity.ok()
                 .body(ToResponseMapper.toResponse(moviesApiRestClientService.searchByProfile(Integer.parseInt(id))));
     }

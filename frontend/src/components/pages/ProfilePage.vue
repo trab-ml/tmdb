@@ -67,11 +67,14 @@ import { EMovieGenre, type IProfile } from "../../types/global.ts";
 import SubmitButton from "../atoms/SubmitButton.vue";
 import ProfilesService from "../../services/ProfilesService.ts";
 import TableOfProfiles from "../organisms/TableOfProfiles.vue";
-import { onMounted, ref, watchEffect, computed } from "vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { ERequestStatus } from "../../types/global.ts";
+import { usePageHead } from "../atoms/usePageHead.ts";
 
 const { t } = useI18n();
+
+usePageHead("profilePage.metaTitle", "profilePage.metaDescription");
 
 export type TSubmitPayload = {
     adult: boolean;

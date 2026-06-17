@@ -59,8 +59,7 @@
             </p>
         </form>
 
-        <MoviesContainer :movieList="movieList" v-if="movieList.length > 0" />
-        <LoadingSpinner v-else />
+        <MoviesContainer :movieList="movieList" />
     </main>
 </template>
 
@@ -75,7 +74,6 @@ import MoviesContainer from "../organisms/MoviesContainer.vue";
 import { useI18n } from "vue-i18n";
 import type { IMovie, IProfile } from "../../types/global.ts";
 import koIcon from "/src/assets/not-ok-32px.png";
-import LoadingSpinner from "../atoms/LoadingSpinner.vue";
 import { usePageHead } from "../atoms/usePageHead.ts";
 
 const { t } = useI18n();

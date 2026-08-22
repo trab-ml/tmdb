@@ -11,6 +11,7 @@ import { aliases } from "vuetify/iconsets/fa";
 import { mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 import { ViteSSG } from "vite-ssg";
+import { createHead } from "@unhead/vue/client";
 
 const vuetify = createVuetify({
     icons: {
@@ -28,6 +29,8 @@ const vuetify = createVuetify({
 });
 
 export const createApp = ViteSSG(App, { routes: routes }, ({ app }) => {
+    const head = createHead();
     app.use(i18n);
+    app.use(head);
     app.use(vuetify);
 });

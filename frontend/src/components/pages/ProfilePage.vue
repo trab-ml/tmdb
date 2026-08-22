@@ -70,11 +70,11 @@ import TableOfProfiles from "../organisms/TableOfProfiles.vue";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { ERequestStatus } from "../../types/global.ts";
-import { usePageHead } from "../atoms/usePageHead.ts";
+import { useSiteHead } from "../../composables/useSiteHead.ts";
 
 const { t } = useI18n();
 
-usePageHead("profilePage.metaTitle", "profilePage.metaDescription");
+useSiteHead("profilePage.metaTitle", "profilePage.metaDescription");
 
 export type TSubmitPayload = {
     adult: boolean;

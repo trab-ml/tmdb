@@ -1,5 +1,5 @@
-import { routes } from "./router.ts";
-import { i18n } from "./utils/translate/translate.ts";
+import { routes } from "./router";
+import { i18n } from "./utils/translate/translate";
 
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";

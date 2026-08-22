@@ -13,6 +13,7 @@
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
+    "@unhead/schema-org": "^3.4.0",
     "@unhead/vue": "^3.1.4",
     "axios": "^1.9.0",
     "create-vuetify": "^2.5.2",

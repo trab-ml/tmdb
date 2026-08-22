@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <footer id="person">
         <a
             :href="t('footer.portfolio.link')"
             target="_blank"

@@ -59,7 +59,7 @@ export const fr = {
   footer: {
     portfolio: {
       title: "Portfolio",
-      link: "https://trab{'|'}ml.github.io/portfolio/",
+      link: "https://trab-ml.github.io/portfolio/",
     },
   },
   notFoundPage: {

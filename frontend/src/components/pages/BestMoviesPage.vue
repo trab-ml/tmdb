@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <main>
+    <main id="webpage">
         <h1>{{ t("popularMoviesPage.title") }}</h1>
 
         <form action="" @submit.prevent="handleSubmit">

@@ -1,7 +1,7 @@
 <template>
     <Header />
     <main id="wrapper" style="overflow: hidden">
-        <h1>{{ t("profilePage.title") }}</h1>
+        <h1 id="webpage">{{ t("profilePage.title") }}</h1>
         <h2>{{ t("profilePage.formTitle") }}</h2>
         <form
             action=""

@@ -1,6 +1,6 @@
 <template>
   <Header/>
-  <main>
+  <main id="webpage">
     <h1>{{ t('topRatedPage.title') }}</h1>
     <MoviesContainer :movieList="movieList"/>
   </main>

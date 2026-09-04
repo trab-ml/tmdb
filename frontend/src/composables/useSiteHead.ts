@@ -72,7 +72,7 @@ export function useSiteHead(titleKey: string, descriptionKey: string) {
             "@id": `${SITE_URL}#app`,
             url: SITE_URL,
             name: "Tourcoing Movies Data Base",
-            META_DESCRIPTION: META_DESCRIPTION,
+            description: META_DESCRIPTION,
             inLanguage: "fr-FR",
             publisher: {
                 "@id": `${SITE_URL}#person`,
@@ -83,7 +83,7 @@ export function useSiteHead(titleKey: string, descriptionKey: string) {
             "@id": `${SITE_URL}#webpage`,
             url: SITE_URL,
             name: META_TITLE,
-            META_DESCRIPTION: META_DESCRIPTION,
+            description: META_DESCRIPTION,
             inLanguage: "fr-FR",
             isPartOf: {
                 "@id": `${SITE_URL}#app`,
